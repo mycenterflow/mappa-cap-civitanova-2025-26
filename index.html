@@ -1,0 +1,4355 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_fd386e5c1af70cc4a5ac0c16137b6afb {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+<div style="
+    position: fixed;
+    top: 10px;
+    left: 50px;
+    z-index: 9999;
+    background-color: white;
+    padding: 10px 14px;
+    border: 2px solid #666;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+">
+    MAPPA CLIENTI
+</div>
+    
+<div style="
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    z-index: 9999;
+    background-color: white;
+    padding: 12px;
+    border: 2px solid #666;
+    border-radius: 8px;
+    font-size: 14px;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+">
+    <b>Legenda clienti</b><br>
+    <span style="color:lightblue;">●</span> 1 - 19<br>
+    <span style="color:green;">●</span> 20 - 49<br>
+    <span style="color:orange;">●</span> 50 - 99<br>
+    <span style="color:red;">●</span> 100 - 199<br>
+    <span style="color:darkred;">●</span> 200+<br>
+</div>
+    
+            <div class="folium-map" id="map_fd386e5c1af70cc4a5ac0c16137b6afb" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_fd386e5c1af70cc4a5ac0c16137b6afb = L.map(
+                "map_fd386e5c1af70cc4a5ac0c16137b6afb",
+                {
+                    center: [42.5, 13.0],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 6,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_c5eb287d1ffe34d3a98be51e6b1ff3fd = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_c5eb287d1ffe34d3a98be51e6b1ff3fd.addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var marker_05bac7b35f9beb0ef3214422ea37903c = L.marker(
+                [43.3085183, 13.7116479],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_bf2c00206fe9741581719fffe7138324 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkred",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_99b4e9cd51a916595187c71a7d86f813 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_187f08dac581166e658304493ef08a2d = $(`<div id="html_187f08dac581166e658304493ef08a2d" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Civitanova Marche, Macerata, Marche, Italia</b><br>         CAP: 62012<br>         Clienti: <b>933</b>     </div>     </div>`)[0];
+                popup_99b4e9cd51a916595187c71a7d86f813.setContent(html_187f08dac581166e658304493ef08a2d);
+            
+        
+
+        marker_05bac7b35f9beb0ef3214422ea37903c.bindPopup(popup_99b4e9cd51a916595187c71a7d86f813)
+        ;
+
+        
+    
+    
+                marker_05bac7b35f9beb0ef3214422ea37903c.setIcon(icon_bf2c00206fe9741581719fffe7138324);
+            
+    
+            var marker_9fec853dabf0e42336d98b7222b42371 = L.marker(
+                [43.3281993, 13.5027201],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_b3685000ea3cbc071c0d39bb0d2c4995 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8f5e6d953ea9956d19c692fb8f498676 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_f0ececa90ec567b98a3f4412f6c2258a = $(`<div id="html_f0ececa90ec567b98a3f4412f6c2258a" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Macerata, Marche, Italia</b><br>         CAP: 62010<br>         Clienti: <b>137</b>     </div>     </div>`)[0];
+                popup_8f5e6d953ea9956d19c692fb8f498676.setContent(html_f0ececa90ec567b98a3f4412f6c2258a);
+            
+        
+
+        marker_9fec853dabf0e42336d98b7222b42371.bindPopup(popup_8f5e6d953ea9956d19c692fb8f498676)
+        ;
+
+        
+    
+    
+                marker_9fec853dabf0e42336d98b7222b42371.setIcon(icon_b3685000ea3cbc071c0d39bb0d2c4995);
+            
+    
+            var marker_820d91ca2caca66283065ba70e0bd5dd = L.marker(
+                [43.36642, 13.6574088],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_63ef72e35fd2460500a7e3f02229698f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_164d158a0412d1115c384a75d7e90616 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_74de6dc4b6b4a27b0698e3d2080e4ab4 = $(`<div id="html_74de6dc4b6b4a27b0698e3d2080e4ab4" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Potenza Picena, Macerata, Italia</b><br>         CAP: 62018<br>         Clienti: <b>76</b>     </div>     </div>`)[0];
+                popup_164d158a0412d1115c384a75d7e90616.setContent(html_74de6dc4b6b4a27b0698e3d2080e4ab4);
+            
+        
+
+        marker_820d91ca2caca66283065ba70e0bd5dd.bindPopup(popup_164d158a0412d1115c384a75d7e90616)
+        ;
+
+        
+    
+    
+                marker_820d91ca2caca66283065ba70e0bd5dd.setIcon(icon_63ef72e35fd2460500a7e3f02229698f);
+            
+    
+            var marker_1edb222bd9ef2ebd8f84098f5380315f = L.marker(
+                [43.2601378, 13.7509287],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_2cebe16b0e7145633670cffc227a3832 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_17d5b5e1024bbf32fe32163fa86359a0 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4dbe8e4c50b735645671ba6dfc3f0bcb = $(`<div id="html_4dbe8e4c50b735645671ba6dfc3f0bcb" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Porto Sant'Elpidio, Fermo, Marche, Italia</b><br>         CAP: 63821<br>         Clienti: <b>69</b>     </div>     </div>`)[0];
+                popup_17d5b5e1024bbf32fe32163fa86359a0.setContent(html_4dbe8e4c50b735645671ba6dfc3f0bcb);
+            
+        
+
+        marker_1edb222bd9ef2ebd8f84098f5380315f.bindPopup(popup_17d5b5e1024bbf32fe32163fa86359a0)
+        ;
+
+        
+    
+    
+                marker_1edb222bd9ef2ebd8f84098f5380315f.setIcon(icon_2cebe16b0e7145633670cffc227a3832);
+            
+    
+            var marker_c543ce53e1969ee88fb6afa9d6d2af3a = L.marker(
+                [43.1657439, 13.7290798],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_09f3787937deefd2143ba8279105e440 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_635be738a658eafdbbb6f6da8dfdf9b8 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_c418a8e8fcfa2f717f6f061406ece196 = $(`<div id="html_c418a8e8fcfa2f717f6f061406ece196" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Fermo, Marche, Italia</b><br>         CAP: 63900<br>         Clienti: <b>47</b>     </div>     </div>`)[0];
+                popup_635be738a658eafdbbb6f6da8dfdf9b8.setContent(html_c418a8e8fcfa2f717f6f061406ece196);
+            
+        
+
+        marker_c543ce53e1969ee88fb6afa9d6d2af3a.bindPopup(popup_635be738a658eafdbbb6f6da8dfdf9b8)
+        ;
+
+        
+    
+    
+                marker_c543ce53e1969ee88fb6afa9d6d2af3a.setIcon(icon_09f3787937deefd2143ba8279105e440);
+            
+    
+            var marker_d6384b25220e8992e02aaf9a3b179147 = L.marker(
+                [43.4329562, 13.6609986],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_7d17931c0fea2549aba7f5e6e8a8e30e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_328440bed83cb270a5af03ec5bbc1f5e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9989627fc52b11ad8a35bf8463589324 = $(`<div id="html_9989627fc52b11ad8a35bf8463589324" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Porto Recanati, Macerata, Marche, Italia</b><br>         CAP: 62017<br>         Clienti: <b>44</b>     </div>     </div>`)[0];
+                popup_328440bed83cb270a5af03ec5bbc1f5e.setContent(html_9989627fc52b11ad8a35bf8463589324);
+            
+        
+
+        marker_d6384b25220e8992e02aaf9a3b179147.bindPopup(popup_328440bed83cb270a5af03ec5bbc1f5e)
+        ;
+
+        
+    
+    
+                marker_d6384b25220e8992e02aaf9a3b179147.setIcon(icon_7d17931c0fea2549aba7f5e6e8a8e30e);
+            
+    
+            var marker_fb4f7d3328ae28be9ef0811d0a02864e = L.marker(
+                [43.298779, 13.4504495],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_1d3593d7bbaeb25ae096c64079948da9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_6955af67bc57be81ae4afece34e97fe3 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_11103d7468f207883020d767e0c1bf6e = $(`<div id="html_11103d7468f207883020d767e0c1bf6e" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Macerata, Marche, Italia</b><br>         CAP: 62100<br>         Clienti: <b>43</b>     </div>     </div>`)[0];
+                popup_6955af67bc57be81ae4afece34e97fe3.setContent(html_11103d7468f207883020d767e0c1bf6e);
+            
+        
+
+        marker_fb4f7d3328ae28be9ef0811d0a02864e.bindPopup(popup_6955af67bc57be81ae4afece34e97fe3)
+        ;
+
+        
+    
+    
+                marker_fb4f7d3328ae28be9ef0811d0a02864e.setIcon(icon_1d3593d7bbaeb25ae096c64079948da9);
+            
+    
+            var marker_adc85866103f94de1380da416dfe999e = L.marker(
+                [43.2460707, 13.7005751],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_be4dc74f707af78cf9e61732e73c063c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_373213e11ee1a050399e70a40f9f46a8 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9bf587e2520d6f6ce8661bfec13b2d39 = $(`<div id="html_9bf587e2520d6f6ce8661bfec13b2d39" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Sant'Elpidio a Mare, Fermo, Marche, Italia</b><br>         CAP: 63811<br>         Clienti: <b>31</b>     </div>     </div>`)[0];
+                popup_373213e11ee1a050399e70a40f9f46a8.setContent(html_9bf587e2520d6f6ce8661bfec13b2d39);
+            
+        
+
+        marker_adc85866103f94de1380da416dfe999e.bindPopup(popup_373213e11ee1a050399e70a40f9f46a8)
+        ;
+
+        
+    
+    
+                marker_adc85866103f94de1380da416dfe999e.setIcon(icon_be4dc74f707af78cf9e61732e73c063c);
+            
+    
+            var marker_37e83da527ec9edb155a22da5f353b80 = L.marker(
+                [43.4025351, 13.5463085],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_d6072794067bdef4af7918df69a25f3c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ccc5ef140f27278d5caeb2eea64c6c7d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_cf74efeab9b41629ff39b75b2fcc4542 = $(`<div id="html_cf74efeab9b41629ff39b75b2fcc4542" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Recanati, Macerata, Italia</b><br>         CAP: 62019<br>         Clienti: <b>24</b>     </div>     </div>`)[0];
+                popup_ccc5ef140f27278d5caeb2eea64c6c7d.setContent(html_cf74efeab9b41629ff39b75b2fcc4542);
+            
+        
+
+        marker_37e83da527ec9edb155a22da5f353b80.bindPopup(popup_ccc5ef140f27278d5caeb2eea64c6c7d)
+        ;
+
+        
+    
+    
+                marker_37e83da527ec9edb155a22da5f353b80.setIcon(icon_d6072794067bdef4af7918df69a25f3c);
+            
+    
+            var marker_07ad63bff28672e605b15d83fececa00 = L.marker(
+                [43.258859, 13.5068433],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_e9ef9c92892e5f92d5718e8721fc5242 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a00c6c2fb3f066c7901e1082dde1c007 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_44e1cd70d296c08f11ee9a6cd3273e80 = $(`<div id="html_44e1cd70d296c08f11ee9a6cd3273e80" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Corridonia, Macerata, Marche, Italia</b><br>         CAP: 62014<br>         Clienti: <b>23</b>     </div>     </div>`)[0];
+                popup_a00c6c2fb3f066c7901e1082dde1c007.setContent(html_44e1cd70d296c08f11ee9a6cd3273e80);
+            
+        
+
+        marker_07ad63bff28672e605b15d83fececa00.bindPopup(popup_a00c6c2fb3f066c7901e1082dde1c007)
+        ;
+
+        
+    
+    
+                marker_07ad63bff28672e605b15d83fececa00.setIcon(icon_e9ef9c92892e5f92d5718e8721fc5242);
+            
+    
+            var marker_1a4a03af932dcf416f07c3c307eb0f05 = L.marker(
+                [43.2369875, 13.6329982],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_b5c5663b1a1c076b5b76a4b24a188e3e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_cebfe22c8c203b236c667b02b6364f5c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4a343d39d5e7d75780c5a9d1c6d17f4a = $(`<div id="html_4a343d39d5e7d75780c5a9d1c6d17f4a" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Montegranaro, Fermo, Italia</b><br>         CAP: 63812<br>         Clienti: <b>18</b>     </div>     </div>`)[0];
+                popup_cebfe22c8c203b236c667b02b6364f5c.setContent(html_4a343d39d5e7d75780c5a9d1c6d17f4a);
+            
+        
+
+        marker_1a4a03af932dcf416f07c3c307eb0f05.bindPopup(popup_cebfe22c8c203b236c667b02b6364f5c)
+        ;
+
+        
+    
+    
+                marker_1a4a03af932dcf416f07c3c307eb0f05.setIcon(icon_b5c5663b1a1c076b5b76a4b24a188e3e);
+            
+    
+            var marker_c3b90abf6b0e1259495218392c46c02d = L.marker(
+                [43.1810231, 13.7950055],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_4bb78cbc486c4681481ed605c6821ff4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b6886c58d84c98f8b6dee33761b24d24 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_cdfa8f4e3792365adad00cf10f72b5c1 = $(`<div id="html_cdfa8f4e3792365adad00cf10f72b5c1" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Porto San Giorgio, Fermo, Marche, Italia</b><br>         CAP: 63822<br>         Clienti: <b>17</b>     </div>     </div>`)[0];
+                popup_b6886c58d84c98f8b6dee33761b24d24.setContent(html_cdfa8f4e3792365adad00cf10f72b5c1);
+            
+        
+
+        marker_c3b90abf6b0e1259495218392c46c02d.bindPopup(popup_b6886c58d84c98f8b6dee33761b24d24)
+        ;
+
+        
+    
+    
+                marker_c3b90abf6b0e1259495218392c46c02d.setIcon(icon_4bb78cbc486c4681481ed605c6821ff4);
+            
+    
+            var marker_cb052e9723db75e987f97c93ca152cc4 = L.marker(
+                [43.4643099, 13.5631086],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_f193290496e7a7595f4d34922cdf2bb8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_fa4669408e9bd7268c55445e30bab65e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_bdbce1ab4639e0d2532c36a8f8c7a7ac = $(`<div id="html_bdbce1ab4639e0d2532c36a8f8c7a7ac" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Crocette, Castelfidardo, Ancona, Marche, Italia</b><br>         CAP: 60022<br>         Clienti: <b>13</b>     </div>     </div>`)[0];
+                popup_fa4669408e9bd7268c55445e30bab65e.setContent(html_bdbce1ab4639e0d2532c36a8f8c7a7ac);
+            
+        
+
+        marker_cb052e9723db75e987f97c93ca152cc4.bindPopup(popup_fa4669408e9bd7268c55445e30bab65e)
+        ;
+
+        
+    
+    
+                marker_cb052e9723db75e987f97c93ca152cc4.setIcon(icon_f193290496e7a7595f4d34922cdf2bb8);
+            
+    
+            var marker_5ddb06d24fac5d84323b5252369b1785 = L.marker(
+                [43.1365004, 13.331637],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_f74155d15e7f21be63e0539544efec3b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_290ace77696ceaf18cc1fa89c246703e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8bae73c2aa4069833b52c5ecd0cd9d1c = $(`<div id="html_8bae73c2aa4069833b52c5ecd0cd9d1c" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 San Ginesio, Macerata, Italia</b><br>         CAP: 62020<br>         Clienti: <b>12</b>     </div>     </div>`)[0];
+                popup_290ace77696ceaf18cc1fa89c246703e.setContent(html_8bae73c2aa4069833b52c5ecd0cd9d1c);
+            
+        
+
+        marker_5ddb06d24fac5d84323b5252369b1785.bindPopup(popup_290ace77696ceaf18cc1fa89c246703e)
+        ;
+
+        
+    
+    
+                marker_5ddb06d24fac5d84323b5252369b1785.setIcon(icon_f74155d15e7f21be63e0539544efec3b);
+            
+    
+            var marker_6cc8221beda906d7e1970ab91bb776b5 = L.marker(
+                [43.1972078, 13.6680234],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_efe869d30d0013c66fdce0528c55fd03 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_faf2bf7c7bea9789092e7f86df1b115d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_730c7d84628b9eb2180b406ea62b493c = $(`<div id="html_730c7d84628b9eb2180b406ea62b493c" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Monte Urano, Fermo, Marche, Italia</b><br>         CAP: 63813<br>         Clienti: <b>11</b>     </div>     </div>`)[0];
+                popup_faf2bf7c7bea9789092e7f86df1b115d.setContent(html_730c7d84628b9eb2180b406ea62b493c);
+            
+        
+
+        marker_6cc8221beda906d7e1970ab91bb776b5.bindPopup(popup_faf2bf7c7bea9789092e7f86df1b115d)
+        ;
+
+        
+    
+    
+                marker_6cc8221beda906d7e1970ab91bb776b5.setIcon(icon_efe869d30d0013c66fdce0528c55fd03);
+            
+    
+            var marker_fce8745cb06bc152bacdb477f576aaeb = L.marker(
+                [43.2392655, 13.5927511],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_6e6863c606e9a3f5474b59928139d77f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5e44a1e47f5c7a21293a9d072d109eaa = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9f190d2904ec371073b4022718fae0a3 = $(`<div id="html_9f190d2904ec371073b4022718fae0a3" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Monte San Giusto, Macerata, Italia</b><br>         CAP: 62015<br>         Clienti: <b>10</b>     </div>     </div>`)[0];
+                popup_5e44a1e47f5c7a21293a9d072d109eaa.setContent(html_9f190d2904ec371073b4022718fae0a3);
+            
+        
+
+        marker_fce8745cb06bc152bacdb477f576aaeb.bindPopup(popup_5e44a1e47f5c7a21293a9d072d109eaa)
+        ;
+
+        
+    
+    
+                marker_fce8745cb06bc152bacdb477f576aaeb.setIcon(icon_6e6863c606e9a3f5474b59928139d77f);
+            
+    
+            var marker_3b0bbff7e61124e57c7f5197438b81f2 = L.marker(
+                [43.48432, 13.4620392],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_5843858f404b8c8b7c801142b2fc183c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_65538890116ccacd98c62018cd93df10 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_42fbafb4a544fa0743868332357219f7 = $(`<div id="html_42fbafb4a544fa0743868332357219f7" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Osimo, Ancona, Marche, Italia</b><br>         CAP: 60027<br>         Clienti: <b>10</b>     </div>     </div>`)[0];
+                popup_65538890116ccacd98c62018cd93df10.setContent(html_42fbafb4a544fa0743868332357219f7);
+            
+        
+
+        marker_3b0bbff7e61124e57c7f5197438b81f2.bindPopup(popup_65538890116ccacd98c62018cd93df10)
+        ;
+
+        
+    
+    
+                marker_3b0bbff7e61124e57c7f5197438b81f2.setIcon(icon_5843858f404b8c8b7c801142b2fc183c);
+            
+    
+            var marker_3848eb9ed94c0feb924b4c614e75588c = L.marker(
+                [43.2135678, 13.3040059],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_234632c982b02ea23a183376b1924cd9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5b2b9c81679df4d910a8f03152d5408b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_67244519e0159c0a749bf210c8570a50 = $(`<div id="html_67244519e0159c0a749bf210c8570a50" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Tolentino, Macerata, Italia</b><br>         CAP: 62029<br>         Clienti: <b>9</b>     </div>     </div>`)[0];
+                popup_5b2b9c81679df4d910a8f03152d5408b.setContent(html_67244519e0159c0a749bf210c8570a50);
+            
+        
+
+        marker_3848eb9ed94c0feb924b4c614e75588c.bindPopup(popup_5b2b9c81679df4d910a8f03152d5408b)
+        ;
+
+        
+    
+    
+                marker_3848eb9ed94c0feb924b4c614e75588c.setIcon(icon_234632c982b02ea23a183376b1924cd9);
+            
+    
+            var marker_2db64a785f2d34a0cb19e16c3b5b92f9 = L.marker(
+                [43.5473616, 13.3638328],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_96149de23a2bc331ec39ca9d554d156e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e048354947777683fe92efcd983f393e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ddda26a755ffa37bb561d1ed9d366a04 = $(`<div id="html_ddda26a755ffa37bb561d1ed9d366a04" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Agugliano, Ancona, Marche, Italia</b><br>         CAP: 60020<br>         Clienti: <b>7</b>     </div>     </div>`)[0];
+                popup_e048354947777683fe92efcd983f393e.setContent(html_ddda26a755ffa37bb561d1ed9d366a04);
+            
+        
+
+        marker_2db64a785f2d34a0cb19e16c3b5b92f9.bindPopup(popup_e048354947777683fe92efcd983f393e)
+        ;
+
+        
+    
+    
+                marker_2db64a785f2d34a0cb19e16c3b5b92f9.setIcon(icon_96149de23a2bc331ec39ca9d554d156e);
+            
+    
+            var marker_40032a23224dd576fe3ac1beae3b5472 = L.marker(
+                [43.1416703, 13.0712578],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_5ea7aa723bcf10a08fc7be41478cb60d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_aa3d5cf888b15ee59fa6e835ffc5b7df = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e3c767daeee54c212509ecfaee189dbf = $(`<div id="html_e3c767daeee54c212509ecfaee189dbf" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Camerino, Macerata, Marche, Italia</b><br>         CAP: 62032<br>         Clienti: <b>6</b>     </div>     </div>`)[0];
+                popup_aa3d5cf888b15ee59fa6e835ffc5b7df.setContent(html_e3c767daeee54c212509ecfaee189dbf);
+            
+        
+
+        marker_40032a23224dd576fe3ac1beae3b5472.bindPopup(popup_aa3d5cf888b15ee59fa6e835ffc5b7df)
+        ;
+
+        
+    
+    
+                marker_40032a23224dd576fe3ac1beae3b5472.setIcon(icon_5ea7aa723bcf10a08fc7be41478cb60d);
+            
+    
+            var marker_c1b77705fc1bf0bbd29c15d01040b9cd = L.marker(
+                [43.6023781, 13.504969],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_426173062c604d5751a071cf351bb198 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_861c1605fda35c1536ae119846eb0042 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_5cbcdf9c5cb68367866cc81954889f6d = $(`<div id="html_5cbcdf9c5cb68367866cc81954889f6d" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Ancona, Marche, Italia</b><br>         CAP: 60127<br>         Clienti: <b>5</b>     </div>     </div>`)[0];
+                popup_861c1605fda35c1536ae119846eb0042.setContent(html_5cbcdf9c5cb68367866cc81954889f6d);
+            
+        
+
+        marker_c1b77705fc1bf0bbd29c15d01040b9cd.bindPopup(popup_861c1605fda35c1536ae119846eb0042)
+        ;
+
+        
+    
+    
+                marker_c1b77705fc1bf0bbd29c15d01040b9cd.setIcon(icon_426173062c604d5751a071cf351bb198);
+            
+    
+            var marker_4d6ebb27d5c6a91e03f62224c509992f = L.marker(
+                [43.4368051, 13.6233152],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_9e7aeb53ad1d6da6683628b36da006d1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3407a5bed8d0fd0e84f188eb88c85d29 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6b4b17ad0a136e56f9d8f5bbec9e69f3 = $(`<div id="html_6b4b17ad0a136e56f9d8f5bbec9e69f3" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Loreto Stazione, Loreto, Ancona, Marche, Italia</b><br>         CAP: 60025<br>         Clienti: <b>5</b>     </div>     </div>`)[0];
+                popup_3407a5bed8d0fd0e84f188eb88c85d29.setContent(html_6b4b17ad0a136e56f9d8f5bbec9e69f3);
+            
+        
+
+        marker_4d6ebb27d5c6a91e03f62224c509992f.bindPopup(popup_3407a5bed8d0fd0e84f188eb88c85d29)
+        ;
+
+        
+    
+    
+                marker_4d6ebb27d5c6a91e03f62224c509992f.setIcon(icon_9e7aeb53ad1d6da6683628b36da006d1);
+            
+    
+            var marker_648eeda75014228cb6e7bd0fb13fe203 = L.marker(
+                [43.2392922, 13.1787667],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_8abc011a5766e9b0e21ba3f7e1a063fe = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7b08dff7a2d3142e5aa98356d1802ab3 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e47d28910a1ec6f44ee21fe76b2ae990 = $(`<div id="html_e47d28910a1ec6f44ee21fe76b2ae990" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 San Severino Marche, Macerata, Marche, Italia</b><br>         CAP: 62027<br>         Clienti: <b>5</b>     </div>     </div>`)[0];
+                popup_7b08dff7a2d3142e5aa98356d1802ab3.setContent(html_e47d28910a1ec6f44ee21fe76b2ae990);
+            
+        
+
+        marker_648eeda75014228cb6e7bd0fb13fe203.bindPopup(popup_7b08dff7a2d3142e5aa98356d1802ab3)
+        ;
+
+        
+    
+    
+                marker_648eeda75014228cb6e7bd0fb13fe203.setIcon(icon_8abc011a5766e9b0e21ba3f7e1a063fe);
+            
+    
+            var marker_389b7277246bafb71edf9458a1140667 = L.marker(
+                [43.2088611, 13.5729477],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_220c77904e20a2a971824f53dec27434 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_648f6e1a39fae24d88b70ea0e92e350a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_7f4bb630f35a030486cd40235728fc00 = $(`<div id="html_7f4bb630f35a030486cd40235728fc00" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Monte San Pietrangeli, Fermo, Italia</b><br>         CAP: 63815<br>         Clienti: <b>5</b>     </div>     </div>`)[0];
+                popup_648f6e1a39fae24d88b70ea0e92e350a.setContent(html_7f4bb630f35a030486cd40235728fc00);
+            
+        
+
+        marker_389b7277246bafb71edf9458a1140667.bindPopup(popup_648f6e1a39fae24d88b70ea0e92e350a)
+        ;
+
+        
+    
+    
+                marker_389b7277246bafb71edf9458a1140667.setIcon(icon_220c77904e20a2a971824f53dec27434);
+            
+    
+            var marker_ac1807be75a933b430a2dc943dc7420e = L.marker(
+                [43.1083762, 13.3286888],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_59ed7e5a140aec3b16200d0149c78684 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3656b01a11c1efd82cd3e3c03ea50ae0 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_a65682ab3758914c6d4e8e7b1e037e2f = $(`<div id="html_a65682ab3758914c6d4e8e7b1e037e2f" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 San Ginesio, Macerata, Italia</b><br>         CAP: 62026<br>         Clienti: <b>5</b>     </div>     </div>`)[0];
+                popup_3656b01a11c1efd82cd3e3c03ea50ae0.setContent(html_a65682ab3758914c6d4e8e7b1e037e2f);
+            
+        
+
+        marker_ac1807be75a933b430a2dc943dc7420e.bindPopup(popup_3656b01a11c1efd82cd3e3c03ea50ae0)
+        ;
+
+        
+    
+    
+                marker_ac1807be75a933b430a2dc943dc7420e.setIcon(icon_59ed7e5a140aec3b16200d0149c78684);
+            
+    
+            var marker_14276a394e94febeca4f674ca080aa17 = L.marker(
+                [43.2609738, 13.0112057],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_61ad3db639efa9ddcdcefb17997dabf3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_369850d7e9150b5f8d04a2223f8e63bc = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_a514d87d693b2fcd72ee6bbc960a87a4 = $(`<div id="html_a514d87d693b2fcd72ee6bbc960a87a4" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Matelica, Macerata, Italia</b><br>         CAP: 62024<br>         Clienti: <b>5</b>     </div>     </div>`)[0];
+                popup_369850d7e9150b5f8d04a2223f8e63bc.setContent(html_a514d87d693b2fcd72ee6bbc960a87a4);
+            
+        
+
+        marker_14276a394e94febeca4f674ca080aa17.bindPopup(popup_369850d7e9150b5f8d04a2223f8e63bc)
+        ;
+
+        
+    
+    
+                marker_14276a394e94febeca4f674ca080aa17.setIcon(icon_61ad3db639efa9ddcdcefb17997dabf3);
+            
+    
+            var marker_e60472740979f83b91c432250e57f64c = L.marker(
+                [43.6187619, 13.512997],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_6715f9133b924d860067b4dfecd662cc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7d8e1f00474d465d2064d4c02bef7378 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ea29826e6857d9ebfdfea58fd8d0c890 = $(`<div id="html_ea29826e6857d9ebfdfea58fd8d0c890" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Ancona, Marche, Italia</b><br>         CAP: 60121<br>         Clienti: <b>4</b>     </div>     </div>`)[0];
+                popup_7d8e1f00474d465d2064d4c02bef7378.setContent(html_ea29826e6857d9ebfdfea58fd8d0c890);
+            
+        
+
+        marker_e60472740979f83b91c432250e57f64c.bindPopup(popup_7d8e1f00474d465d2064d4c02bef7378)
+        ;
+
+        
+    
+    
+                marker_e60472740979f83b91c432250e57f64c.setIcon(icon_6715f9133b924d860067b4dfecd662cc);
+            
+    
+            var marker_27e6bee5780eaf2d472e366a81240b02 = L.marker(
+                [42.9558895, 12.7154635],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_0172a3301bf24e589dfbed5a73cdf627 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d89950f1e0c587edffa4c8d83a098be5 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_22bcd3cc1aa9fb28fd2affc9ae814211 = $(`<div id="html_22bcd3cc1aa9fb28fd2affc9ae814211" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Foligno, Perugia, Umbria, Italia</b><br>         CAP: 06034<br>         Clienti: <b>4</b>     </div>     </div>`)[0];
+                popup_d89950f1e0c587edffa4c8d83a098be5.setContent(html_22bcd3cc1aa9fb28fd2affc9ae814211);
+            
+        
+
+        marker_27e6bee5780eaf2d472e366a81240b02.bindPopup(popup_d89950f1e0c587edffa4c8d83a098be5)
+        ;
+
+        
+    
+    
+                marker_27e6bee5780eaf2d472e366a81240b02.setIcon(icon_0172a3301bf24e589dfbed5a73cdf627);
+            
+    
+            var marker_eb7bf16cbd94c039a078bb916a66e2ee = L.marker(
+                [42.8510389, 13.6170263],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_5b7f9ea6cdce41c97d19b95376199769 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_65feba6f7edbc34d3887f14dd1370157 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_74b9740a15ad4e7d07ca1265d6a3aa76 = $(`<div id="html_74b9740a15ad4e7d07ca1265d6a3aa76" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Monticelli, Ascoli Piceno, Marche, Italia</b><br>         CAP: 63100<br>         Clienti: <b>4</b>     </div>     </div>`)[0];
+                popup_65feba6f7edbc34d3887f14dd1370157.setContent(html_74b9740a15ad4e7d07ca1265d6a3aa76);
+            
+        
+
+        marker_eb7bf16cbd94c039a078bb916a66e2ee.bindPopup(popup_65feba6f7edbc34d3887f14dd1370157)
+        ;
+
+        
+    
+    
+                marker_eb7bf16cbd94c039a078bb916a66e2ee.setIcon(icon_5b7f9ea6cdce41c97d19b95376199769);
+            
+    
+            var marker_ac236036c81f47ae3d0ef52c27be9b59 = L.marker(
+                [43.3777914, 13.2130323],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_42a233f6a04de42ccd25ac864ce2906a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_acdbe922ece69229245dd588026ce772 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_2fe555fc179e85df23045c839234bdfa = $(`<div id="html_2fe555fc179e85df23045c839234bdfa" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Cingoli, Macerata, Italia</b><br>         CAP: 62011<br>         Clienti: <b>3</b>     </div>     </div>`)[0];
+                popup_acdbe922ece69229245dd588026ce772.setContent(html_2fe555fc179e85df23045c839234bdfa);
+            
+        
+
+        marker_ac236036c81f47ae3d0ef52c27be9b59.bindPopup(popup_acdbe922ece69229245dd588026ce772)
+        ;
+
+        
+    
+    
+                marker_ac236036c81f47ae3d0ef52c27be9b59.setIcon(icon_42a233f6a04de42ccd25ac864ce2906a);
+            
+    
+            var marker_6941a6e648c382e185fcc44ee1ed5b99 = L.marker(
+                [43.0117798, 13.4984497],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_321dbc47c6f87b82981fa4a63876a0a7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_dfb8df190a30563a3e978b32b8e1b32a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b39ac89525a4201d885d8ce6887aa882 = $(`<div id="html_b39ac89525a4201d885d8ce6887aa882" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Santa Vittoria in Matenano, Fermo, Marche, Italia</b><br>         CAP: 63854<br>         Clienti: <b>3</b>     </div>     </div>`)[0];
+                popup_dfb8df190a30563a3e978b32b8e1b32a.setContent(html_b39ac89525a4201d885d8ce6887aa882);
+            
+        
+
+        marker_6941a6e648c382e185fcc44ee1ed5b99.bindPopup(popup_dfb8df190a30563a3e978b32b8e1b32a)
+        ;
+
+        
+    
+    
+                marker_6941a6e648c382e185fcc44ee1ed5b99.setIcon(icon_321dbc47c6f87b82981fa4a63876a0a7);
+            
+    
+            var marker_c0771b141e4e0b872b56c5909a7c2d7c = L.marker(
+                [43.2079867, 13.0556909],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_56fcb86481b6544855428e9090df0629 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7438b8bd787430d94004e657b6fe981d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_01667d4de8ff90ddc89b600f3623c544 = $(`<div id="html_01667d4de8ff90ddc89b600f3623c544" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Castelraimondo, Macerata, Italia</b><br>         CAP: 62022<br>         Clienti: <b>3</b>     </div>     </div>`)[0];
+                popup_7438b8bd787430d94004e657b6fe981d.setContent(html_01667d4de8ff90ddc89b600f3623c544);
+            
+        
+
+        marker_c0771b141e4e0b872b56c5909a7c2d7c.bindPopup(popup_7438b8bd787430d94004e657b6fe981d)
+        ;
+
+        
+    
+    
+                marker_c0771b141e4e0b872b56c5909a7c2d7c.setIcon(icon_56fcb86481b6544855428e9090df0629);
+            
+    
+            var marker_7ccd626bcdc86c984a9696cc3a7f2f0e = L.marker(
+                [43.056762, 13.5818715],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_6ef583b6f96f6b10da8e13da619b0027 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e98fba23a4936e0a9087a6fe0c93e566 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8630e066d0acecf6fc53145f457d4e2d = $(`<div id="html_8630e066d0acecf6fc53145f457d4e2d" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Montottone, Fermo, Marche, Italia</b><br>         CAP: 63843<br>         Clienti: <b>3</b>     </div>     </div>`)[0];
+                popup_e98fba23a4936e0a9087a6fe0c93e566.setContent(html_8630e066d0acecf6fc53145f457d4e2d);
+            
+        
+
+        marker_7ccd626bcdc86c984a9696cc3a7f2f0e.bindPopup(popup_e98fba23a4936e0a9087a6fe0c93e566)
+        ;
+
+        
+    
+    
+                marker_7ccd626bcdc86c984a9696cc3a7f2f0e.setIcon(icon_6ef583b6f96f6b10da8e13da619b0027);
+            
+    
+            var marker_8477d62eb87bf132ed91ebc0209ae928 = L.marker(
+                [43.0976867, 13.8411939],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_2bbdd4f8fbdbed13e6125d2880af6cbb = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a277a1e139b6033389230cf3f4c290bd = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_2ce15ccc849a78df545a3d323b8bfab6 = $(`<div id="html_2ce15ccc849a78df545a3d323b8bfab6" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Pedaso, Fermo, Italia</b><br>         CAP: 63827<br>         Clienti: <b>3</b>     </div>     </div>`)[0];
+                popup_a277a1e139b6033389230cf3f4c290bd.setContent(html_2ce15ccc849a78df545a3d323b8bfab6);
+            
+        
+
+        marker_8477d62eb87bf132ed91ebc0209ae928.bindPopup(popup_a277a1e139b6033389230cf3f4c290bd)
+        ;
+
+        
+    
+    
+                marker_8477d62eb87bf132ed91ebc0209ae928.setIcon(icon_2bbdd4f8fbdbed13e6125d2880af6cbb);
+            
+    
+            var marker_96d5b0114b256b123e767459f5447fce = L.marker(
+                [43.6082244, 13.3197824],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_9a7d851e69b99af29ae6330dbd782030 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_07355349282dd778388b7a5b793ee316 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4e71e4e11cd45b698b6128aa7bb4cc8b = $(`<div id="html_4e71e4e11cd45b698b6128aa7bb4cc8b" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Chiaravalle, Ancona, Marche, Italia</b><br>         CAP: 60033<br>         Clienti: <b>3</b>     </div>     </div>`)[0];
+                popup_07355349282dd778388b7a5b793ee316.setContent(html_4e71e4e11cd45b698b6128aa7bb4cc8b);
+            
+        
+
+        marker_96d5b0114b256b123e767459f5447fce.bindPopup(popup_07355349282dd778388b7a5b793ee316)
+        ;
+
+        
+    
+    
+                marker_96d5b0114b256b123e767459f5447fce.setIcon(icon_9a7d851e69b99af29ae6330dbd782030);
+            
+    
+            var marker_793c4c82256dcbc01f455a4605bc050c = L.marker(
+                [42.5648469, 12.6388817],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_861a617c6f52ad803832faf5e555b618 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e24a745dd52b0ed23ff82ed43cca6628 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4f9af49436cd9b9df98d7179bf0bf3a9 = $(`<div id="html_4f9af49436cd9b9df98d7179bf0bf3a9" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Terni, Umbria, Italia</b><br>         CAP: 05100<br>         Clienti: <b>3</b>     </div>     </div>`)[0];
+                popup_e24a745dd52b0ed23ff82ed43cca6628.setContent(html_4f9af49436cd9b9df98d7179bf0bf3a9);
+            
+        
+
+        marker_793c4c82256dcbc01f455a4605bc050c.bindPopup(popup_e24a745dd52b0ed23ff82ed43cca6628)
+        ;
+
+        
+    
+    
+                marker_793c4c82256dcbc01f455a4605bc050c.setIcon(icon_861a617c6f52ad803832faf5e555b618);
+            
+    
+            var marker_c28053f8d3c91931281a4a64f51bbe97 = L.marker(
+                [43.3194226, 12.9921273],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_a092fc25b4b475d5324ce147b3179923 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_6f83ce123669e5aea7f171e175e4f815 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_a5172bf9b6aed776720145148398b7a0 = $(`<div id="html_a5172bf9b6aed776720145148398b7a0" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Cerreto d'Esi, Ancona, Marche, Italia</b><br>         CAP: 60043<br>         Clienti: <b>3</b>     </div>     </div>`)[0];
+                popup_6f83ce123669e5aea7f171e175e4f815.setContent(html_a5172bf9b6aed776720145148398b7a0);
+            
+        
+
+        marker_c28053f8d3c91931281a4a64f51bbe97.bindPopup(popup_6f83ce123669e5aea7f171e175e4f815)
+        ;
+
+        
+    
+    
+                marker_c28053f8d3c91931281a4a64f51bbe97.setIcon(icon_a092fc25b4b475d5324ce147b3179923);
+            
+    
+            var marker_c5995e1967c8afa0c10a1111079d05c8 = L.marker(
+                [43.6059824, 13.2686282],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_66bcef13ea36d4efa31e8da8bbfe581d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_eafb975560854696f812ed2857fffc9d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_53b5928979f684264fa1a3ef18a7a0a9 = $(`<div id="html_53b5928979f684264fa1a3ef18a7a0a9" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Santi Neri, Santa Lucia, Monte San Vito, Ancona, Marche, Italia</b><br>         CAP: 60037<br>         Clienti: <b>3</b>     </div>     </div>`)[0];
+                popup_eafb975560854696f812ed2857fffc9d.setContent(html_53b5928979f684264fa1a3ef18a7a0a9);
+            
+        
+
+        marker_c5995e1967c8afa0c10a1111079d05c8.bindPopup(popup_eafb975560854696f812ed2857fffc9d)
+        ;
+
+        
+    
+    
+                marker_c5995e1967c8afa0c10a1111079d05c8.setIcon(icon_66bcef13ea36d4efa31e8da8bbfe581d);
+            
+    
+            var marker_322b8c6e1240bfdedd10de126ff9915b = L.marker(
+                [43.127864, 13.5941486],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_0014ba91ab669e0101d440059867551c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_acd2f9bce54801f11ed630b67ccd19fc = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_3b4e6ae59b9108a809cb49c86a98560f = $(`<div id="html_3b4e6ae59b9108a809cb49c86a98560f" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Magliano di Tenna, Fermo, Italia</b><br>         CAP: 63832<br>         Clienti: <b>3</b>     </div>     </div>`)[0];
+                popup_acd2f9bce54801f11ed630b67ccd19fc.setContent(html_3b4e6ae59b9108a809cb49c86a98560f);
+            
+        
+
+        marker_322b8c6e1240bfdedd10de126ff9915b.bindPopup(popup_acd2f9bce54801f11ed630b67ccd19fc)
+        ;
+
+        
+    
+    
+                marker_322b8c6e1240bfdedd10de126ff9915b.setIcon(icon_0014ba91ab669e0101d440059867551c);
+            
+    
+            var marker_5565934263573a242f5c0c52a53c7633 = L.marker(
+                [42.8992593, 13.7920834],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_a1a7963acbdaf7daacec20effdf1c287 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9dd68f582fdcde5840bb93aa190ac6e3 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_77d3f2f9abdc37b9c03edfc2211d5912 = $(`<div id="html_77d3f2f9abdc37b9c03edfc2211d5912" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Fontanelle, Stella, Monsampolo del Tronto, Ascoli Piceno, Marche, Italia</b><br>         CAP: 63077<br>         Clienti: <b>2</b>     </div>     </div>`)[0];
+                popup_9dd68f582fdcde5840bb93aa190ac6e3.setContent(html_77d3f2f9abdc37b9c03edfc2211d5912);
+            
+        
+
+        marker_5565934263573a242f5c0c52a53c7633.bindPopup(popup_9dd68f582fdcde5840bb93aa190ac6e3)
+        ;
+
+        
+    
+    
+                marker_5565934263573a242f5c0c52a53c7633.setIcon(icon_a1a7963acbdaf7daacec20effdf1c287);
+            
+    
+            var marker_9664658c18fe3e4bb403cbb143041288 = L.marker(
+                [42.9273972, 13.8787866],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_3834e87aacf4ea803f91b98f3c4cb237 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ccd2e061eddea29e12d17cd6a9f928e1 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4f2a1daba99b6925296052e74f33fe45 = $(`<div id="html_4f2a1daba99b6925296052e74f33fe45" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Ragnola, San Benedetto del Tronto, Ascoli Piceno, Marche, Italia</b><br>         CAP: 63074<br>         Clienti: <b>2</b>     </div>     </div>`)[0];
+                popup_ccd2e061eddea29e12d17cd6a9f928e1.setContent(html_4f2a1daba99b6925296052e74f33fe45);
+            
+        
+
+        marker_9664658c18fe3e4bb403cbb143041288.bindPopup(popup_ccd2e061eddea29e12d17cd6a9f928e1)
+        ;
+
+        
+    
+    
+                marker_9664658c18fe3e4bb403cbb143041288.setIcon(icon_3834e87aacf4ea803f91b98f3c4cb237);
+            
+    
+            var marker_9c84c725ebb4fa8a8caa511a4e0b1ae2 = L.marker(
+                [43.1152129, 13.604001],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_3a5cfc5551afdc7a1a05f35db4603b67 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4d6fee3513609921eb1d86f5cf5b495b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e6333b75687e7b70892e205c57c3ec15 = $(`<div id="html_e6333b75687e7b70892e205c57c3ec15" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Grottazzolina, Fermo, Marche, Italia</b><br>         CAP: 63844<br>         Clienti: <b>2</b>     </div>     </div>`)[0];
+                popup_4d6fee3513609921eb1d86f5cf5b495b.setContent(html_e6333b75687e7b70892e205c57c3ec15);
+            
+        
+
+        marker_9c84c725ebb4fa8a8caa511a4e0b1ae2.bindPopup(popup_4d6fee3513609921eb1d86f5cf5b495b)
+        ;
+
+        
+    
+    
+                marker_9c84c725ebb4fa8a8caa511a4e0b1ae2.setIcon(icon_3a5cfc5551afdc7a1a05f35db4603b67);
+            
+    
+            var marker_d4a4429e5222e8948bbf3cb51ffefab7 = L.marker(
+                [43.1655347, 12.9734369],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_d9c2e75f464e0db60a1a956f83e52854 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8bfb1ca6d33312e6e78e200507574c09 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_3a542ed2c9c22b463d6824bcba7ba1ae = $(`<div id="html_3a542ed2c9c22b463d6824bcba7ba1ae" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Sefro, Macerata, Italia</b><br>         CAP: 62025<br>         Clienti: <b>2</b>     </div>     </div>`)[0];
+                popup_8bfb1ca6d33312e6e78e200507574c09.setContent(html_3a542ed2c9c22b463d6824bcba7ba1ae);
+            
+        
+
+        marker_d4a4429e5222e8948bbf3cb51ffefab7.bindPopup(popup_8bfb1ca6d33312e6e78e200507574c09)
+        ;
+
+        
+    
+    
+                marker_d4a4429e5222e8948bbf3cb51ffefab7.setIcon(icon_d9c2e75f464e0db60a1a956f83e52854);
+            
+    
+            var marker_fea339e293a023ba1a9ff6af101a3f95 = L.marker(
+                [43.1514451, 13.613795],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_4f930a907b8362fbe565ace021bb26f7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_fc5f454b6cc1c7c71042c5d150d59b7f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b22b7a9b8fc90f5c12056108204cb834 = $(`<div id="html_b22b7a9b8fc90f5c12056108204cb834" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Rapagnano, Fermo, Italia</b><br>         CAP: 63831<br>         Clienti: <b>2</b>     </div>     </div>`)[0];
+                popup_fc5f454b6cc1c7c71042c5d150d59b7f.setContent(html_b22b7a9b8fc90f5c12056108204cb834);
+            
+        
+
+        marker_fea339e293a023ba1a9ff6af101a3f95.bindPopup(popup_fc5f454b6cc1c7c71042c5d150d59b7f)
+        ;
+
+        
+    
+    
+                marker_fea339e293a023ba1a9ff6af101a3f95.setIcon(icon_4f930a907b8362fbe565ace021bb26f7);
+            
+    
+            var marker_1f0b57941d0a6858d021be7c3006175b = L.marker(
+                [43.1192277, 13.487771],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_46feb80323e9a1c42002d59faabc603c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_fc073af4b64d8c90e2c0d9e9391c0798 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_82e7211af488316ee3515c84c60f381a = $(`<div id="html_82e7211af488316ee3515c84c60f381a" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Monte Vidon Corrado, Fermo, Marche, Italia</b><br>         CAP: 63836<br>         Clienti: <b>2</b>     </div>     </div>`)[0];
+                popup_fc073af4b64d8c90e2c0d9e9391c0798.setContent(html_82e7211af488316ee3515c84c60f381a);
+            
+        
+
+        marker_1f0b57941d0a6858d021be7c3006175b.bindPopup(popup_fc073af4b64d8c90e2c0d9e9391c0798)
+        ;
+
+        
+    
+    
+                marker_1f0b57941d0a6858d021be7c3006175b.setIcon(icon_46feb80323e9a1c42002d59faabc603c);
+            
+    
+            var marker_63ac7742fa090ac0ce8b6db16cce8a99 = L.marker(
+                [43.5463549, 13.1643975],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_9d26e094842673a1c004e60b1cd7525d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_161ca03838894e7e17a687a5e5eaa607 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_2b69e22558e5bcb5d494ea89b892b23b = $(`<div id="html_2b69e22558e5bcb5d494ea89b892b23b" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Belvedere Ostrense, Ancona, Marche, Italia</b><br>         CAP: 60030<br>         Clienti: <b>2</b>     </div>     </div>`)[0];
+                popup_161ca03838894e7e17a687a5e5eaa607.setContent(html_2b69e22558e5bcb5d494ea89b892b23b);
+            
+        
+
+        marker_63ac7742fa090ac0ce8b6db16cce8a99.bindPopup(popup_161ca03838894e7e17a687a5e5eaa607)
+        ;
+
+        
+    
+    
+                marker_63ac7742fa090ac0ce8b6db16cce8a99.setIcon(icon_9d26e094842673a1c004e60b1cd7525d);
+            
+    
+            var marker_7711d548554a165ed865b5ea8a5c9183 = L.marker(
+                [43.0274994, 13.1762265],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_167617f6e1f46831fede2963d6add153 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ab7083a69dda77d476aa43910c1f26cf = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6ac199ec9e37a87050f3373fafbee65f = $(`<div id="html_6ac199ec9e37a87050f3373fafbee65f" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Fiastra, Macerata, Marche, Italia</b><br>         CAP: 62035<br>         Clienti: <b>2</b>     </div>     </div>`)[0];
+                popup_ab7083a69dda77d476aa43910c1f26cf.setContent(html_6ac199ec9e37a87050f3373fafbee65f);
+            
+        
+
+        marker_7711d548554a165ed865b5ea8a5c9183.bindPopup(popup_ab7083a69dda77d476aa43910c1f26cf)
+        ;
+
+        
+    
+    
+                marker_7711d548554a165ed865b5ea8a5c9183.setIcon(icon_167617f6e1f46831fede2963d6add153);
+            
+    
+            var marker_282ec6517237e94f916d5e499180be6c = L.marker(
+                [43.1181589, 13.5459897],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_e4c3e965fc608f5f87ab8e3947c7854e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_50c959e7c1d451ed681fac048d535da2 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_3f05cd5135f474937688d3fe44dbaecb = $(`<div id="html_3f05cd5135f474937688d3fe44dbaecb" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Montegiorgio, Fermo, Italia</b><br>         CAP: 63833<br>         Clienti: <b>2</b>     </div>     </div>`)[0];
+                popup_50c959e7c1d451ed681fac048d535da2.setContent(html_3f05cd5135f474937688d3fe44dbaecb);
+            
+        
+
+        marker_282ec6517237e94f916d5e499180be6c.bindPopup(popup_50c959e7c1d451ed681fac048d535da2)
+        ;
+
+        
+    
+    
+                marker_282ec6517237e94f916d5e499180be6c.setIcon(icon_e4c3e965fc608f5f87ab8e3947c7854e);
+            
+    
+            var marker_2b64fe9da13d4fd64f84e79827ffe24b = L.marker(
+                [44.4802778, 11.3653293],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_70b9b33236a7d7af6c2f4f1c11bbee02 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a68533fc7dc727337d63b942d03c55b8 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_c648b2287f46b8bb18850726884e65a9 = $(`<div id="html_c648b2287f46b8bb18850726884e65a9" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Santo Stefano, Bologna, Emilia-Romagna, Italia</b><br>         CAP: 40137<br>         Clienti: <b>2</b>     </div>     </div>`)[0];
+                popup_a68533fc7dc727337d63b942d03c55b8.setContent(html_c648b2287f46b8bb18850726884e65a9);
+            
+        
+
+        marker_2b64fe9da13d4fd64f84e79827ffe24b.bindPopup(popup_a68533fc7dc727337d63b942d03c55b8)
+        ;
+
+        
+    
+    
+                marker_2b64fe9da13d4fd64f84e79827ffe24b.setIcon(icon_70b9b33236a7d7af6c2f4f1c11bbee02);
+            
+    
+            var marker_51a1e6239e3096a8b6461e15bf6236ca = L.marker(
+                [43.4559609, 12.2386225],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_237af7915eb1c8d8f5273018d9d0c702 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_78e6d686cb5e27c144f693dc3b5328a5 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4ee64a75c5079182790f9f2f68415b89 = $(`<div id="html_4ee64a75c5079182790f9f2f68415b89" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Città di Castello, Perugia, Umbria, Italia</b><br>         CAP: 06012<br>         Clienti: <b>2</b>     </div>     </div>`)[0];
+                popup_78e6d686cb5e27c144f693dc3b5328a5.setContent(html_4ee64a75c5079182790f9f2f68415b89);
+            
+        
+
+        marker_51a1e6239e3096a8b6461e15bf6236ca.bindPopup(popup_78e6d686cb5e27c144f693dc3b5328a5)
+        ;
+
+        
+    
+    
+                marker_51a1e6239e3096a8b6461e15bf6236ca.setIcon(icon_237af7915eb1c8d8f5273018d9d0c702);
+            
+    
+            var marker_043d127c460dfdf0874051b63ebcce5a = L.marker(
+                [43.5730173, 13.5085715],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_72a3d32cace4b21f196eb7fe81f2f0df = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ffe40eb4b20d4f38f0863d1064de14d9 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4d49293f1f9ac845f7a0716a5d0258e4 = $(`<div id="html_4d49293f1f9ac845f7a0716a5d0258e4" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Ancona, Marche, Italia</b><br>         CAP: 60131<br>         Clienti: <b>2</b>     </div>     </div>`)[0];
+                popup_ffe40eb4b20d4f38f0863d1064de14d9.setContent(html_4d49293f1f9ac845f7a0716a5d0258e4);
+            
+        
+
+        marker_043d127c460dfdf0874051b63ebcce5a.bindPopup(popup_ffe40eb4b20d4f38f0863d1064de14d9)
+        ;
+
+        
+    
+    
+                marker_043d127c460dfdf0874051b63ebcce5a.setIcon(icon_72a3d32cace4b21f196eb7fe81f2f0df);
+            
+    
+            var marker_92272e8da51312da4c1293d3c12e1fb5 = L.marker(
+                [43.081367, 12.3301385],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_24be80f229cb24aac4b10130bdb2f49a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_6d15445b9787fb47520839d4c6ae423f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_2c88cf224ea89f734a7d7691d306547a = $(`<div id="html_2c88cf224ea89f734a7d7691d306547a" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Perugia, Umbria, Italia</b><br>         CAP: 06132<br>         Clienti: <b>2</b>     </div>     </div>`)[0];
+                popup_6d15445b9787fb47520839d4c6ae423f.setContent(html_2c88cf224ea89f734a7d7691d306547a);
+            
+        
+
+        marker_92272e8da51312da4c1293d3c12e1fb5.bindPopup(popup_6d15445b9787fb47520839d4c6ae423f)
+        ;
+
+        
+    
+    
+                marker_92272e8da51312da4c1293d3c12e1fb5.setIcon(icon_24be80f229cb24aac4b10130bdb2f49a);
+            
+    
+            var marker_6af0e0427a0514092ea51d88e96dbd97 = L.marker(
+                [43.3205637, 12.8817326],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_860972e5a5520e8c36095809995a181d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e3c834e701669fc35628b38e68995b17 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d7bf66b342e280668f9cc5a47ba64bd4 = $(`<div id="html_d7bf66b342e280668f9cc5a47ba64bd4" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Fabriano, Ancona, Marche, Italia</b><br>         CAP: 60044<br>         Clienti: <b>2</b>     </div>     </div>`)[0];
+                popup_e3c834e701669fc35628b38e68995b17.setContent(html_d7bf66b342e280668f9cc5a47ba64bd4);
+            
+        
+
+        marker_6af0e0427a0514092ea51d88e96dbd97.bindPopup(popup_e3c834e701669fc35628b38e68995b17)
+        ;
+
+        
+    
+    
+                marker_6af0e0427a0514092ea51d88e96dbd97.setIcon(icon_860972e5a5520e8c36095809995a181d);
+            
+    
+            var marker_1d0ee88a4c622e3c79f2f07624b1eb6a = L.marker(
+                [43.1072949, 13.8282989],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_34ccd01ca0bb23c51ab9c0446d79d29b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8c474d95bad5b2e802d1fa91d953e796 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_052746fa18016de27adf7f9a663b5cf0 = $(`<div id="html_052746fa18016de27adf7f9a663b5cf0" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Altidona, Fermo, Italia</b><br>         CAP: 63824<br>         Clienti: <b>2</b>     </div>     </div>`)[0];
+                popup_8c474d95bad5b2e802d1fa91d953e796.setContent(html_052746fa18016de27adf7f9a663b5cf0);
+            
+        
+
+        marker_1d0ee88a4c622e3c79f2f07624b1eb6a.bindPopup(popup_8c474d95bad5b2e802d1fa91d953e796)
+        ;
+
+        
+    
+    
+                marker_1d0ee88a4c622e3c79f2f07624b1eb6a.setIcon(icon_34ccd01ca0bb23c51ab9c0446d79d29b);
+            
+    
+            var marker_e5884d1c54564fe7e511fd202810d0c8 = L.marker(
+                [43.0873739, 13.7172253],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_f3086f39a5f421294a50a5c77e36307c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_979b217d8257d94158c8c448801f6fc3 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_060a02b7b00ded0bb715e7a3873586b5 = $(`<div id="html_060a02b7b00ded0bb715e7a3873586b5" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Monterubbiano, Fermo, Marche, Italia</b><br>         CAP: 63825<br>         Clienti: <b>2</b>     </div>     </div>`)[0];
+                popup_979b217d8257d94158c8c448801f6fc3.setContent(html_060a02b7b00ded0bb715e7a3873586b5);
+            
+        
+
+        marker_e5884d1c54564fe7e511fd202810d0c8.bindPopup(popup_979b217d8257d94158c8c448801f6fc3)
+        ;
+
+        
+    
+    
+                marker_e5884d1c54564fe7e511fd202810d0c8.setIcon(icon_f3086f39a5f421294a50a5c77e36307c);
+            
+    
+            var marker_322990173ac41c66e6c6fdd8ac50e067 = L.marker(
+                [45.4118803, 11.8904501],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_f7b2b11c908b6524956a0106ec965359 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_64b69091a059a4b640b9dbf5d9b15fe7 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b6664256af40eecbbf2e01ed6bde3ac3 = $(`<div id="html_b6664256af40eecbbf2e01ed6bde3ac3" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Padova, Veneto, Italia</b><br>         CAP: 35131<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_64b69091a059a4b640b9dbf5d9b15fe7.setContent(html_b6664256af40eecbbf2e01ed6bde3ac3);
+            
+        
+
+        marker_322990173ac41c66e6c6fdd8ac50e067.bindPopup(popup_64b69091a059a4b640b9dbf5d9b15fe7)
+        ;
+
+        
+    
+    
+                marker_322990173ac41c66e6c6fdd8ac50e067.setIcon(icon_f7b2b11c908b6524956a0106ec965359);
+            
+    
+            var marker_6790d543fd3050b0a0cdd98b50f95ffe = L.marker(
+                [36.7263761, 14.8465079],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_af70bfd8afa4ed26a3507f5a269a17d6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9b11d7f93a63ebb8cd2be1d54d629b13 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_98de252a8252afaed2c2a43142086ac1 = $(`<div id="html_98de252a8252afaed2c2a43142086ac1" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Pozzallo, Ragusa, Sicilia, Italia</b><br>         CAP: 97016<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_9b11d7f93a63ebb8cd2be1d54d629b13.setContent(html_98de252a8252afaed2c2a43142086ac1);
+            
+        
+
+        marker_6790d543fd3050b0a0cdd98b50f95ffe.bindPopup(popup_9b11d7f93a63ebb8cd2be1d54d629b13)
+        ;
+
+        
+    
+    
+                marker_6790d543fd3050b0a0cdd98b50f95ffe.setIcon(icon_af70bfd8afa4ed26a3507f5a269a17d6);
+            
+    
+            var marker_81ed86a2470ef005ff04848279aa0292 = L.marker(
+                [41.8844105, 12.5204242],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_fc357e85529d5ac698b0b337bb957464 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f78895119de9bd8ac251c0b0f84469af = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_1e1a89f8200e87ceb47016a4f8abed69 = $(`<div id="html_1e1a89f8200e87ceb47016a4f8abed69" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Tuscolano, Roma, Roma Capitale, Lazio, Italia</b><br>         CAP: 00182<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_f78895119de9bd8ac251c0b0f84469af.setContent(html_1e1a89f8200e87ceb47016a4f8abed69);
+            
+        
+
+        marker_81ed86a2470ef005ff04848279aa0292.bindPopup(popup_f78895119de9bd8ac251c0b0f84469af)
+        ;
+
+        
+    
+    
+                marker_81ed86a2470ef005ff04848279aa0292.setIcon(icon_fc357e85529d5ac698b0b337bb957464);
+            
+    
+            var marker_850c75324256f49ca65ac7e4733b1b37 = L.marker(
+                [43.0239871, 13.8394807],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_3e842ae9edb38ce51eaf68fb3d90b220 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ce1b40819c521082b0003b2e9e9c2e5f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_587726addba944d5e98df4b4872e9580 = $(`<div id="html_587726addba944d5e98df4b4872e9580" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Cupra Marittima, Ascoli Piceno, Marche, Italia</b><br>         CAP: 63064<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_ce1b40819c521082b0003b2e9e9c2e5f.setContent(html_587726addba944d5e98df4b4872e9580);
+            
+        
+
+        marker_850c75324256f49ca65ac7e4733b1b37.bindPopup(popup_ce1b40819c521082b0003b2e9e9c2e5f)
+        ;
+
+        
+    
+    
+                marker_850c75324256f49ca65ac7e4733b1b37.setIcon(icon_3e842ae9edb38ce51eaf68fb3d90b220);
+            
+    
+            var marker_f982e2b8b2a73eea9ead76963c714208 = L.marker(
+                [45.4762097, 9.1381972],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_5ffffb107d6949b4b9bbea49820785c1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_be9312fbafdf7742509c20891304c460 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_79994f5c00ad02e7becdedfc1fc358bf = $(`<div id="html_79994f5c00ad02e7becdedfc1fc358bf" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Municipio 7, Milano, Lombardia, Italia</b><br>         CAP: 20148<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_be9312fbafdf7742509c20891304c460.setContent(html_79994f5c00ad02e7becdedfc1fc358bf);
+            
+        
+
+        marker_f982e2b8b2a73eea9ead76963c714208.bindPopup(popup_be9312fbafdf7742509c20891304c460)
+        ;
+
+        
+    
+    
+                marker_f982e2b8b2a73eea9ead76963c714208.setIcon(icon_5ffffb107d6949b4b9bbea49820785c1);
+            
+    
+            var marker_2759a71fc519c7ac9698b2dcb68b559c = L.marker(
+                [42.9287496, 13.1035641],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_c16575398dcdd996c89cdeaf15fb808a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3dde3630eae5287bc43277b51e97ee02 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_f58534f7af2b9b9914428c6f0aecdebd = $(`<div id="html_f58534f7af2b9b9914428c6f0aecdebd" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Visso, Macerata, Marche, Italia</b><br>         CAP: 62039<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_3dde3630eae5287bc43277b51e97ee02.setContent(html_f58534f7af2b9b9914428c6f0aecdebd);
+            
+        
+
+        marker_2759a71fc519c7ac9698b2dcb68b559c.bindPopup(popup_3dde3630eae5287bc43277b51e97ee02)
+        ;
+
+        
+    
+    
+                marker_2759a71fc519c7ac9698b2dcb68b559c.setIcon(icon_c16575398dcdd996c89cdeaf15fb808a);
+            
+    
+            var marker_60f0c007b92db03b0d6d2b73bc2a8390 = L.marker(
+                [42.9326677, 13.6224804],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_508169bc4af48ed97ba81451e133472d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_744478e47949947709813403df2902ca = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_5dfd2ba193ec02d09ebf01cc29b86c6e = $(`<div id="html_5dfd2ba193ec02d09ebf01cc29b86c6e" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Castignano, Ascoli Piceno, Marche, Italia</b><br>         CAP: 63072<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_744478e47949947709813403df2902ca.setContent(html_5dfd2ba193ec02d09ebf01cc29b86c6e);
+            
+        
+
+        marker_60f0c007b92db03b0d6d2b73bc2a8390.bindPopup(popup_744478e47949947709813403df2902ca)
+        ;
+
+        
+    
+    
+                marker_60f0c007b92db03b0d6d2b73bc2a8390.setIcon(icon_508169bc4af48ed97ba81451e133472d);
+            
+    
+            var marker_4920d81c18858ea964c52ab9f286a38a = L.marker(
+                [43.5982866, 13.5137632],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_37cff36003c35235f99fb7dbf19ce6c9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e5f22805a701f6e9be7e4ab82b23dc23 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_27f007f5fa4bd96ba7f9e9a84564ea22 = $(`<div id="html_27f007f5fa4bd96ba7f9e9a84564ea22" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Ancona, Marche, Italia</b><br>         CAP: 60128<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_e5f22805a701f6e9be7e4ab82b23dc23.setContent(html_27f007f5fa4bd96ba7f9e9a84564ea22);
+            
+        
+
+        marker_4920d81c18858ea964c52ab9f286a38a.bindPopup(popup_e5f22805a701f6e9be7e4ab82b23dc23)
+        ;
+
+        
+    
+    
+                marker_4920d81c18858ea964c52ab9f286a38a.setIcon(icon_37cff36003c35235f99fb7dbf19ce6c9);
+            
+    
+            var marker_28862a61e0f4afaebdf2614738cf8370 = L.marker(
+                [43.6432498, 13.3061824],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_c099320ffe1b33939bcd0fcbf2b6b295 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_1414fa65dfdc5fc83beb2f6f175a257d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_3f9626e57ea0f5b1cacbac3a2d2d8c3d = $(`<div id="html_3f9626e57ea0f5b1cacbac3a2d2d8c3d" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Montemarciano, Ancona, Marche, Italia</b><br>         CAP: 60018<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_1414fa65dfdc5fc83beb2f6f175a257d.setContent(html_3f9626e57ea0f5b1cacbac3a2d2d8c3d);
+            
+        
+
+        marker_28862a61e0f4afaebdf2614738cf8370.bindPopup(popup_1414fa65dfdc5fc83beb2f6f175a257d)
+        ;
+
+        
+    
+    
+                marker_28862a61e0f4afaebdf2614738cf8370.setIcon(icon_c099320ffe1b33939bcd0fcbf2b6b295);
+            
+    
+            var marker_cb404ac8f78cb2d28397c414bf53dc6d = L.marker(
+                [43.1451159, 13.4771498],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_243b8d01b900c494be810b05ca637759 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d49975a4b7673b9e7e1d3cb522317950 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_79af1f36c5c3bffd87ab193909687b8a = $(`<div id="html_79af1f36c5c3bffd87ab193909687b8a" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Massa Fermana, Fermo, Italia</b><br>         CAP: 63834<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_d49975a4b7673b9e7e1d3cb522317950.setContent(html_79af1f36c5c3bffd87ab193909687b8a);
+            
+        
+
+        marker_cb404ac8f78cb2d28397c414bf53dc6d.bindPopup(popup_d49975a4b7673b9e7e1d3cb522317950)
+        ;
+
+        
+    
+    
+                marker_cb404ac8f78cb2d28397c414bf53dc6d.setIcon(icon_243b8d01b900c494be810b05ca637759);
+            
+    
+            var marker_4349aafabf63cd87c880b41c41a7f2fa = L.marker(
+                [43.4485127, 13.1211571],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_e1ef0e10352cd217fc953e185001464e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d1ff461dfea8192772ef37113a25076c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_98efb1c13651205121730de09bd37626 = $(`<div id="html_98efb1c13651205121730de09bd37626" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Cupramontana, Ancona, Marche, Italia</b><br>         CAP: 60034<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_d1ff461dfea8192772ef37113a25076c.setContent(html_98efb1c13651205121730de09bd37626);
+            
+        
+
+        marker_4349aafabf63cd87c880b41c41a7f2fa.bindPopup(popup_d1ff461dfea8192772ef37113a25076c)
+        ;
+
+        
+    
+    
+                marker_4349aafabf63cd87c880b41c41a7f2fa.setIcon(icon_e1ef0e10352cd217fc953e185001464e);
+            
+    
+            var marker_c6788f4a476cddeb888535ea9466feec = L.marker(
+                [43.4315445, 13.0370857],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_fabe4461bb3f04913f48260de6d364bb = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_48d75949a2e1af2cc4284b53e89ac37a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6f5b3c02448772733f25c04851a5d8e9 = $(`<div id="html_6f5b3c02448772733f25c04851a5d8e9" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Serra San Quirico, Ancona, Marche, Italia</b><br>         CAP: 60048<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_48d75949a2e1af2cc4284b53e89ac37a.setContent(html_6f5b3c02448772733f25c04851a5d8e9);
+            
+        
+
+        marker_c6788f4a476cddeb888535ea9466feec.bindPopup(popup_48d75949a2e1af2cc4284b53e89ac37a)
+        ;
+
+        
+    
+    
+                marker_c6788f4a476cddeb888535ea9466feec.setIcon(icon_fabe4461bb3f04913f48260de6d364bb);
+            
+    
+            var marker_371681c117bdb8d3ca7dcc882051f2a2 = L.marker(
+                [41.5001484, 15.3405411],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_e9c961b159dcd361a20ec2967f3c3bba = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7c6ef7ce546d8454005915f2181094ef = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9664deeab25a332a4bdfdfec9e2daec4 = $(`<div id="html_9664deeab25a332a4bdfdfec9e2daec4" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Lucera, Foggia, Puglia, Italia</b><br>         CAP: 71036<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_7c6ef7ce546d8454005915f2181094ef.setContent(html_9664deeab25a332a4bdfdfec9e2daec4);
+            
+        
+
+        marker_371681c117bdb8d3ca7dcc882051f2a2.bindPopup(popup_7c6ef7ce546d8454005915f2181094ef)
+        ;
+
+        
+    
+    
+                marker_371681c117bdb8d3ca7dcc882051f2a2.setIcon(icon_e9c961b159dcd361a20ec2967f3c3bba);
+            
+    
+            var marker_f144191488ec1a92b746834ba67108bd = L.marker(
+                [41.4648835, 12.6664881],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_230f1121299e1a4775fdae6c3d400a3c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_fdbe87f45c70ccd19040f18370216347 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_bedceefa485cea7f9dbfef53e7637bab = $(`<div id="html_bedceefa485cea7f9dbfef53e7637bab" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Nettuno, Roma Capitale, Lazio, Italia</b><br>         CAP: 00048<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_fdbe87f45c70ccd19040f18370216347.setContent(html_bedceefa485cea7f9dbfef53e7637bab);
+            
+        
+
+        marker_f144191488ec1a92b746834ba67108bd.bindPopup(popup_fdbe87f45c70ccd19040f18370216347)
+        ;
+
+        
+    
+    
+                marker_f144191488ec1a92b746834ba67108bd.setIcon(icon_230f1121299e1a4775fdae6c3d400a3c);
+            
+    
+            var marker_1ea70f493b3c5bd56ffe623ec35ce8ff = L.marker(
+                [42.9095545, 13.8372522],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_986abfbca41fab190be387329cba3bc7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_c4f1593b06fe21935b1ab19ddc867ed1 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_87f417b687b7a387411226f92c0e1f7e = $(`<div id="html_87f417b687b7a387411226f92c0e1f7e" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Monteprandone, Ascoli Piceno, Marche, Italia</b><br>         CAP: 63076<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_c4f1593b06fe21935b1ab19ddc867ed1.setContent(html_87f417b687b7a387411226f92c0e1f7e);
+            
+        
+
+        marker_1ea70f493b3c5bd56ffe623ec35ce8ff.bindPopup(popup_c4f1593b06fe21935b1ab19ddc867ed1)
+        ;
+
+        
+    
+    
+                marker_1ea70f493b3c5bd56ffe623ec35ce8ff.setIcon(icon_986abfbca41fab190be387329cba3bc7);
+            
+    
+            var marker_98a8f073140ba7dd839cda832e229620 = L.marker(
+                [42.9439542, 13.3248948],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_e37ef3f95a5144b9eff20c46ad5d7721 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_6d26dda5f446cfba2ec0b627b32bacd8 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6dccd7bb22270b9d6d853193fe54b93b = $(`<div id="html_6dccd7bb22270b9d6d853193fe54b93b" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Montefortino, Fermo, Marche, Italia</b><br>         CAP: 63858<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_6d26dda5f446cfba2ec0b627b32bacd8.setContent(html_6dccd7bb22270b9d6d853193fe54b93b);
+            
+        
+
+        marker_98a8f073140ba7dd839cda832e229620.bindPopup(popup_6d26dda5f446cfba2ec0b627b32bacd8)
+        ;
+
+        
+    
+    
+                marker_98a8f073140ba7dd839cda832e229620.setIcon(icon_e37ef3f95a5144b9eff20c46ad5d7721);
+            
+    
+            var marker_a4072401b27b8d98d1ff2a2532c0d500 = L.marker(
+                [43.5094309, 13.104435],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_00bde09166f6b0c8b89e8974a6cde8f8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_76b67afa0edfc9041dc6ef18699d633d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_963500bbda4f62ccc9e920d77d7b513a = $(`<div id="html_963500bbda4f62ccc9e920d77d7b513a" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Castelplanio, Ancona, Marche, Italia</b><br>         CAP: 60031<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_76b67afa0edfc9041dc6ef18699d633d.setContent(html_963500bbda4f62ccc9e920d77d7b513a);
+            
+        
+
+        marker_a4072401b27b8d98d1ff2a2532c0d500.bindPopup(popup_76b67afa0edfc9041dc6ef18699d633d)
+        ;
+
+        
+    
+    
+                marker_a4072401b27b8d98d1ff2a2532c0d500.setIcon(icon_00bde09166f6b0c8b89e8974a6cde8f8);
+            
+    
+            var marker_8ad93f0c1a9ca12a918a2763a6306722 = L.marker(
+                [43.5233745, 13.2560171],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_1aa72d9954f8b9f84b3c3d10bbfcd9d1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5da8f9cbee94a1e9ceb7919411c694b7 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d3ded2d3467424756ef0737b67c10da8 = $(`<div id="html_d3ded2d3467424756ef0737b67c10da8" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Jesi, Ancona, Marche, Italia</b><br>         CAP: 60035<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_5da8f9cbee94a1e9ceb7919411c694b7.setContent(html_d3ded2d3467424756ef0737b67c10da8);
+            
+        
+
+        marker_8ad93f0c1a9ca12a918a2763a6306722.bindPopup(popup_5da8f9cbee94a1e9ceb7919411c694b7)
+        ;
+
+        
+    
+    
+                marker_8ad93f0c1a9ca12a918a2763a6306722.setIcon(icon_1aa72d9954f8b9f84b3c3d10bbfcd9d1);
+            
+    
+            var marker_fbbe6f2db2d30fd43e96446d51dbd7d1 = L.marker(
+                [40.5149925, 17.1341431],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_40b2ca5b030323761c7a681b62f80d0b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ce776da9e6a84bfc29d8fe6cdc487657 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_60fdb02a401c5075d309418936f2cd0c = $(`<div id="html_60fdb02a401c5075d309418936f2cd0c" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Italia</b><br>         CAP: 74010<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_ce776da9e6a84bfc29d8fe6cdc487657.setContent(html_60fdb02a401c5075d309418936f2cd0c);
+            
+        
+
+        marker_fbbe6f2db2d30fd43e96446d51dbd7d1.bindPopup(popup_ce776da9e6a84bfc29d8fe6cdc487657)
+        ;
+
+        
+    
+    
+                marker_fbbe6f2db2d30fd43e96446d51dbd7d1.setIcon(icon_40b2ca5b030323761c7a681b62f80d0b);
+            
+    
+            var marker_728fc5ee9e61a4945ecd3a343f8d2c4b = L.marker(
+                [43.0042452, 13.058024],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_6663584270c6e3a7e5021ff8b0e499a6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_67b34f0312305a78da0193f6ce2432ea = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_7f22915a3cbbe7a1a0b06f124bc3234c = $(`<div id="html_7f22915a3cbbe7a1a0b06f124bc3234c" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Pieve Torina, Macerata, Italia</b><br>         CAP: 62036<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_67b34f0312305a78da0193f6ce2432ea.setContent(html_7f22915a3cbbe7a1a0b06f124bc3234c);
+            
+        
+
+        marker_728fc5ee9e61a4945ecd3a343f8d2c4b.bindPopup(popup_67b34f0312305a78da0193f6ce2432ea)
+        ;
+
+        
+    
+    
+                marker_728fc5ee9e61a4945ecd3a343f8d2c4b.setIcon(icon_6663584270c6e3a7e5021ff8b0e499a6);
+            
+    
+            var marker_c3dccfdac4dc96eaaa844502a2d61d07 = L.marker(
+                [44.0794516, 12.5560144],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_68c6f6ccab2a4e7fb2492c518cb1f322 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a1e75ed27eaaca6561ecddcaf4a93a02 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_7cff8704e941dc817bda83e7f17730a3 = $(`<div id="html_7cff8704e941dc817bda83e7f17730a3" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Italia</b><br>         CAP: 61010<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_a1e75ed27eaaca6561ecddcaf4a93a02.setContent(html_7cff8704e941dc817bda83e7f17730a3);
+            
+        
+
+        marker_c3dccfdac4dc96eaaa844502a2d61d07.bindPopup(popup_a1e75ed27eaaca6561ecddcaf4a93a02)
+        ;
+
+        
+    
+    
+                marker_c3dccfdac4dc96eaaa844502a2d61d07.setIcon(icon_68c6f6ccab2a4e7fb2492c518cb1f322);
+            
+    
+            var marker_72d4edff65a974294f7f4c340abe475b = L.marker(
+                [43.6207496, 13.3844209],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_3369f5ec59b9666cb86a91e3bc681526 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4813032e912e1c4535fb28ce91f2a491 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d96ed9dbad1330a94ec95e7cb21e8239 = $(`<div id="html_d96ed9dbad1330a94ec95e7cb21e8239" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Falconara Marittima, Ancona, Marche, Italia</b><br>         CAP: 60015<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_4813032e912e1c4535fb28ce91f2a491.setContent(html_d96ed9dbad1330a94ec95e7cb21e8239);
+            
+        
+
+        marker_72d4edff65a974294f7f4c340abe475b.bindPopup(popup_4813032e912e1c4535fb28ce91f2a491)
+        ;
+
+        
+    
+    
+                marker_72d4edff65a974294f7f4c340abe475b.setIcon(icon_3369f5ec59b9666cb86a91e3bc681526);
+            
+    
+            var marker_44d1cc71318dddf139724bb411e6ee0f = L.marker(
+                [41.8985519, 12.5045422],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_d06ee8a36430653fabdd7304af2bb20c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7eb8bfd18328f066489e4733936e926c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b1e9d26d417fa47248689ec6aef2e9fb = $(`<div id="html_b1e9d26d417fa47248689ec6aef2e9fb" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Municipio Roma I, Roma, Roma Capitale, Lazio, Italia</b><br>         CAP: 00185<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_7eb8bfd18328f066489e4733936e926c.setContent(html_b1e9d26d417fa47248689ec6aef2e9fb);
+            
+        
+
+        marker_44d1cc71318dddf139724bb411e6ee0f.bindPopup(popup_7eb8bfd18328f066489e4733936e926c)
+        ;
+
+        
+    
+    
+                marker_44d1cc71318dddf139724bb411e6ee0f.setIcon(icon_d06ee8a36430653fabdd7304af2bb20c);
+            
+    
+            var marker_9430e0f9cee4a30be85b3a9242dd23f0 = L.marker(
+                [43.6038699, 13.1040415],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_667c119b6e785f5cd1f955d5d20b0768 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_dc9982a911e6cbe7fb9538653cf40c61 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_19c6407499f3b26285c29d29c97fe12b = $(`<div id="html_19c6407499f3b26285c29d29c97fe12b" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Pancaldo, Ostra Vetere, Ancona, Marche, Italia</b><br>         CAP: 60010<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_dc9982a911e6cbe7fb9538653cf40c61.setContent(html_19c6407499f3b26285c29d29c97fe12b);
+            
+        
+
+        marker_9430e0f9cee4a30be85b3a9242dd23f0.bindPopup(popup_dc9982a911e6cbe7fb9538653cf40c61)
+        ;
+
+        
+    
+    
+                marker_9430e0f9cee4a30be85b3a9242dd23f0.setIcon(icon_667c119b6e785f5cd1f955d5d20b0768);
+            
+    
+            var marker_2dc0eb1608e39db10a24c43162b4d071 = L.marker(
+                [40.3533612, 18.1754311],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_d55f85edb026c6b7bb04bc75586531a7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_fb33a1d8ae94e4127bd3e9bf0bf0502f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_0fb34ca08d39c0437f5a6b4eedad62e5 = $(`<div id="html_0fb34ca08d39c0437f5a6b4eedad62e5" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Lecce, Puglia, Italia</b><br>         CAP: 73100<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_fb33a1d8ae94e4127bd3e9bf0bf0502f.setContent(html_0fb34ca08d39c0437f5a6b4eedad62e5);
+            
+        
+
+        marker_2dc0eb1608e39db10a24c43162b4d071.bindPopup(popup_fb33a1d8ae94e4127bd3e9bf0bf0502f)
+        ;
+
+        
+    
+    
+                marker_2dc0eb1608e39db10a24c43162b4d071.setIcon(icon_d55f85edb026c6b7bb04bc75586531a7);
+            
+    
+            var marker_6ed763739f4671cdd84a8d4357fd297f = L.marker(
+                [42.9791966, 13.3475517],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_318246a12fc390802390ebee659cfbc6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_bbb14a37eb611866cef446be016894ff = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ccb324915f23a073ac8693575b54bdae = $(`<div id="html_ccb324915f23a073ac8693575b54bdae" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Amandola, Fermo, Marche, Italia</b><br>         CAP: 63857<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_bbb14a37eb611866cef446be016894ff.setContent(html_ccb324915f23a073ac8693575b54bdae);
+            
+        
+
+        marker_6ed763739f4671cdd84a8d4357fd297f.bindPopup(popup_bbb14a37eb611866cef446be016894ff)
+        ;
+
+        
+    
+    
+                marker_6ed763739f4671cdd84a8d4357fd297f.setIcon(icon_318246a12fc390802390ebee659cfbc6);
+            
+    
+            var marker_061f5be3f1d88979b7a5c359c316f3db = L.marker(
+                [42.1660387, 14.6097019],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_2f3a6dd509474a1146492b9c267c3d35 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_bc3f459475b73632230bc7b88e9bcf18 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b88862951acc4d93ee41456eb1a88fce = $(`<div id="html_b88862951acc4d93ee41456eb1a88fce" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Casalbordino, Chieti, Abruzzo, Italia</b><br>         CAP: 66021<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_bc3f459475b73632230bc7b88e9bcf18.setContent(html_b88862951acc4d93ee41456eb1a88fce);
+            
+        
+
+        marker_061f5be3f1d88979b7a5c359c316f3db.bindPopup(popup_bc3f459475b73632230bc7b88e9bcf18)
+        ;
+
+        
+    
+    
+                marker_061f5be3f1d88979b7a5c359c316f3db.setIcon(icon_2f3a6dd509474a1146492b9c267c3d35);
+            
+    
+            var marker_31ce1d49097d93b8176dde28cbdaf8ef = L.marker(
+                [43.1014406, 13.4809403],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_8d40fb75cfc3fac293292fa1d52a23f7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8e943038e28c8abdc327c1fece257498 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_0dd59355a5faeddb7d0ed6ad82a5663f = $(`<div id="html_0dd59355a5faeddb7d0ed6ad82a5663f" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Falerone, Fermo, Italia</b><br>         CAP: 63837<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_8e943038e28c8abdc327c1fece257498.setContent(html_0dd59355a5faeddb7d0ed6ad82a5663f);
+            
+        
+
+        marker_31ce1d49097d93b8176dde28cbdaf8ef.bindPopup(popup_8e943038e28c8abdc327c1fece257498)
+        ;
+
+        
+    
+    
+                marker_31ce1d49097d93b8176dde28cbdaf8ef.setIcon(icon_8d40fb75cfc3fac293292fa1d52a23f7);
+            
+    
+            var marker_77b68b2421361f9ff67d430e1cc47155 = L.marker(
+                [42.2624558, 14.0020012],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_13745895233d36564166798afe6e0640 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_6981ac2c11abb87b88458220677b283e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_7f0f5302fc718ae84c108f349c324c2a = $(`<div id="html_7f0f5302fc718ae84c108f349c324c2a" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Scafa, Pescara, Italia</b><br>         CAP: 65027<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_6981ac2c11abb87b88458220677b283e.setContent(html_7f0f5302fc718ae84c108f349c324c2a);
+            
+        
+
+        marker_77b68b2421361f9ff67d430e1cc47155.bindPopup(popup_6981ac2c11abb87b88458220677b283e)
+        ;
+
+        
+    
+    
+                marker_77b68b2421361f9ff67d430e1cc47155.setIcon(icon_13745895233d36564166798afe6e0640);
+            
+    
+            var marker_a87a9d83f044c2089eecdd579f615629 = L.marker(
+                [43.0498816, 13.7417405],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_72b7ad0591da8b9eabf1f2ad34d05988 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_911ae7eb1647ef891bc481ec168a0886 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_a8fc0a3e1cf29241266f9af398039cf7 = $(`<div id="html_a8fc0a3e1cf29241266f9af398039cf7" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Montefiore dell'Aso, Ascoli Piceno, Marche, Italia</b><br>         CAP: 63062<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_911ae7eb1647ef891bc481ec168a0886.setContent(html_a8fc0a3e1cf29241266f9af398039cf7);
+            
+        
+
+        marker_a87a9d83f044c2089eecdd579f615629.bindPopup(popup_911ae7eb1647ef891bc481ec168a0886)
+        ;
+
+        
+    
+    
+                marker_a87a9d83f044c2089eecdd579f615629.setIcon(icon_72b7ad0591da8b9eabf1f2ad34d05988);
+            
+    
+            var marker_c5d7b3fc8aac00c747877044e2621695 = L.marker(
+                [43.0891791, 13.6261229],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_b56dd5a82e02d9985c3846c82af1a191 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9a508d0fd64399dd03d26d64e54e1bca = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_aee8046f69ea64a0d8a36a5f567841f2 = $(`<div id="html_aee8046f69ea64a0d8a36a5f567841f2" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Monte Giberto, Fermo, Italia</b><br>         CAP: 63846<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_9a508d0fd64399dd03d26d64e54e1bca.setContent(html_aee8046f69ea64a0d8a36a5f567841f2);
+            
+        
+
+        marker_c5d7b3fc8aac00c747877044e2621695.bindPopup(popup_9a508d0fd64399dd03d26d64e54e1bca)
+        ;
+
+        
+    
+    
+                marker_c5d7b3fc8aac00c747877044e2621695.setIcon(icon_b56dd5a82e02d9985c3846c82af1a191);
+            
+    
+            var marker_2558ca5aad13ca56459d506fe6ff6d68 = L.marker(
+                [43.2874658, 13.7349007],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_0b143238923b722dc6065bfdd949df8f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b9454d23e0d2822e32a873578c70bf8b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_90fd661ed0ab4c3c2a204bca74eb05f4 = $(`<div id="html_90fd661ed0ab4c3c2a204bca74eb05f4" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Porto Sant'Elpidio, Fermo, Marche, Italia</b><br>         CAP: 63018<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_b9454d23e0d2822e32a873578c70bf8b.setContent(html_90fd661ed0ab4c3c2a204bca74eb05f4);
+            
+        
+
+        marker_2558ca5aad13ca56459d506fe6ff6d68.bindPopup(popup_b9454d23e0d2822e32a873578c70bf8b)
+        ;
+
+        
+    
+    
+                marker_2558ca5aad13ca56459d506fe6ff6d68.setIcon(icon_0b143238923b722dc6065bfdd949df8f);
+            
+    
+            var marker_d83363b99e37da422a283e2452124adb = L.marker(
+                [43.5235313, 13.5476354],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_d7248fa5a605aed5fa80595982c3cc1d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b75efad3da0fa9da4ef063da516a887b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_a98a44dd66f11499d995b13513161670 = $(`<div id="html_a98a44dd66f11499d995b13513161670" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Camerano, Ancona, Marche, Italia</b><br>         CAP: 60021<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_b75efad3da0fa9da4ef063da516a887b.setContent(html_a98a44dd66f11499d995b13513161670);
+            
+        
+
+        marker_d83363b99e37da422a283e2452124adb.bindPopup(popup_b75efad3da0fa9da4ef063da516a887b)
+        ;
+
+        
+    
+    
+                marker_d83363b99e37da422a283e2452124adb.setIcon(icon_d7248fa5a605aed5fa80595982c3cc1d);
+            
+    
+            var marker_4665dfa4f7b67de19ca1abfb47365d72 = L.marker(
+                [42.9596334, 13.4920078],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_b0d1305e2ca819ebaa397061f55bbe92 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_664bc2043d38db75d15eb098df5bd1d8 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_cae44c303440ab34c98ec97e2d5eeca6 = $(`<div id="html_cae44c303440ab34c98ec97e2d5eeca6" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Force, Ascoli Piceno, Marche, Italia</b><br>         CAP: 63086<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_664bc2043d38db75d15eb098df5bd1d8.setContent(html_cae44c303440ab34c98ec97e2d5eeca6);
+            
+        
+
+        marker_4665dfa4f7b67de19ca1abfb47365d72.bindPopup(popup_664bc2043d38db75d15eb098df5bd1d8)
+        ;
+
+        
+    
+    
+                marker_4665dfa4f7b67de19ca1abfb47365d72.setIcon(icon_b0d1305e2ca819ebaa397061f55bbe92);
+            
+    
+            var marker_1bf9de19fb1bb7a49c9e661d3a57175a = L.marker(
+                [44.4783745, 11.3851574],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_d57dcee95f266a2377b4996bc36beecf = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4134270d8718d1dfcd199e708a2b0c55 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8fbba1b1afef5c33dc742469c055ef0b = $(`<div id="html_8fbba1b1afef5c33dc742469c055ef0b" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Savena, Bologna, Emilia-Romagna, Italia</b><br>         CAP: 40139<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_4134270d8718d1dfcd199e708a2b0c55.setContent(html_8fbba1b1afef5c33dc742469c055ef0b);
+            
+        
+
+        marker_1bf9de19fb1bb7a49c9e661d3a57175a.bindPopup(popup_4134270d8718d1dfcd199e708a2b0c55)
+        ;
+
+        
+    
+    
+                marker_1bf9de19fb1bb7a49c9e661d3a57175a.setIcon(icon_d57dcee95f266a2377b4996bc36beecf);
+            
+    
+            var marker_3c684963cae10f3d36735175782132d3 = L.marker(
+                [42.8440661, 13.8023216],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_65dcd5d5fc67b40e658edad019b7c31a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2bbc051d94c00524bd57ba5331ed5cb5 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9f9a4f14a583241014789a915961351d = $(`<div id="html_9f9a4f14a583241014789a915961351d" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Controguerra, Unione dei Comuni della Val Vibrata, Teramo, Abruzzo, Italia</b><br>         CAP: 64010<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_2bbc051d94c00524bd57ba5331ed5cb5.setContent(html_9f9a4f14a583241014789a915961351d);
+            
+        
+
+        marker_3c684963cae10f3d36735175782132d3.bindPopup(popup_2bbc051d94c00524bd57ba5331ed5cb5)
+        ;
+
+        
+    
+    
+                marker_3c684963cae10f3d36735175782132d3.setIcon(icon_65dcd5d5fc67b40e658edad019b7c31a);
+            
+    
+            var marker_59e19d9c877e4721ab3aeba1860235fe = L.marker(
+                [43.6071208, 13.4687354],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_e908f59d0b59868db6d0d9d676a813d7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_90b774d0dd45a97bc2497a5d1e14eb45 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e3843aa4bf551a7eaf8eb2d65563a9f0 = $(`<div id="html_e3843aa4bf551a7eaf8eb2d65563a9f0" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Ancona, Marche, Italia</b><br>         CAP: 60126<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_90b774d0dd45a97bc2497a5d1e14eb45.setContent(html_e3843aa4bf551a7eaf8eb2d65563a9f0);
+            
+        
+
+        marker_59e19d9c877e4721ab3aeba1860235fe.bindPopup(popup_90b774d0dd45a97bc2497a5d1e14eb45)
+        ;
+
+        
+    
+    
+                marker_59e19d9c877e4721ab3aeba1860235fe.setIcon(icon_e908f59d0b59868db6d0d9d676a813d7);
+            
+    
+            var marker_b94bba27a66d73070702f09a38544f9c = L.marker(
+                [39.076579, 17.1257197],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_e42d73dda8242a3405f3588824623cf0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_04ba39e1449013ce16ab91875afa5814 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_935263e485c7c83903daa759485a0e71 = $(`<div id="html_935263e485c7c83903daa759485a0e71" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Crotone, Calabria, Italia</b><br>         CAP: 88900<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_04ba39e1449013ce16ab91875afa5814.setContent(html_935263e485c7c83903daa759485a0e71);
+            
+        
+
+        marker_b94bba27a66d73070702f09a38544f9c.bindPopup(popup_04ba39e1449013ce16ab91875afa5814)
+        ;
+
+        
+    
+    
+                marker_b94bba27a66d73070702f09a38544f9c.setIcon(icon_e42d73dda8242a3405f3588824623cf0);
+            
+    
+            var marker_55bf63591c1bef6662907f580c182f5a = L.marker(
+                [45.6709691, 9.0010732],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_5b7295bc3c417d0159d8ecdf684eb093 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_066442fd98908b4622aec976fb372b4c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e17a3d8f910beb03dc2e98893c0f1d47 = $(`<div id="html_e17a3d8f910beb03dc2e98893c0f1d47" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Turate, Como, Lombardia, Italia</b><br>         CAP: 22078<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_066442fd98908b4622aec976fb372b4c.setContent(html_e17a3d8f910beb03dc2e98893c0f1d47);
+            
+        
+
+        marker_55bf63591c1bef6662907f580c182f5a.bindPopup(popup_066442fd98908b4622aec976fb372b4c)
+        ;
+
+        
+    
+    
+                marker_55bf63591c1bef6662907f580c182f5a.setIcon(icon_5b7295bc3c417d0159d8ecdf684eb093);
+            
+    
+            var marker_a8829db2373cc63da0d3d990daeacee6 = L.marker(
+                [43.384989, 13.121558],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_7713989f1884fdd51be7398587104d1a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_00f8e6e80813515bdf66b13b2eeb277b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b7d1d563cfbd798254be87c0e672fe60 = $(`<div id="html_b7d1d563cfbd798254be87c0e672fe60" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Apiro, Macerata, Italia</b><br>         CAP: 62021<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_00f8e6e80813515bdf66b13b2eeb277b.setContent(html_b7d1d563cfbd798254be87c0e672fe60);
+            
+        
+
+        marker_a8829db2373cc63da0d3d990daeacee6.bindPopup(popup_00f8e6e80813515bdf66b13b2eeb277b)
+        ;
+
+        
+    
+    
+                marker_a8829db2373cc63da0d3d990daeacee6.setIcon(icon_7713989f1884fdd51be7398587104d1a);
+            
+    
+            var marker_980ca4b933896da7be5e57c8476d3b63 = L.marker(
+                [43.4344529, 13.3483604],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_f728cb8d0675a1f7cd72b8c09114277a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f38fa088021c2a42718fe4bd3eee7bcd = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_98a76d72dbede6a3ba1b9fd80e80eab0 = $(`<div id="html_98a76d72dbede6a3ba1b9fd80e80eab0" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Filottrano, Ancona, Marche, Italia</b><br>         CAP: 60024<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_f38fa088021c2a42718fe4bd3eee7bcd.setContent(html_98a76d72dbede6a3ba1b9fd80e80eab0);
+            
+        
+
+        marker_980ca4b933896da7be5e57c8476d3b63.bindPopup(popup_f38fa088021c2a42718fe4bd3eee7bcd)
+        ;
+
+        
+    
+    
+                marker_980ca4b933896da7be5e57c8476d3b63.setIcon(icon_f728cb8d0675a1f7cd72b8c09114277a);
+            
+    
+            var marker_06763adffc4b2dcd5b945848aa907191 = L.marker(
+                [42.2272614, 14.3993608],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_88bd3d31b56e3b36774a17c34e69baf1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a2caa8953ee8597ccafeba85692c0ff1 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_08c74942ec7e0ff8d6f2af63d9c78048 = $(`<div id="html_08c74942ec7e0ff8d6f2af63d9c78048" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Lanciano, Chieti, Italia</b><br>         CAP: 66034<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_a2caa8953ee8597ccafeba85692c0ff1.setContent(html_08c74942ec7e0ff8d6f2af63d9c78048);
+            
+        
+
+        marker_06763adffc4b2dcd5b945848aa907191.bindPopup(popup_a2caa8953ee8597ccafeba85692c0ff1)
+        ;
+
+        
+    
+    
+                marker_06763adffc4b2dcd5b945848aa907191.setIcon(icon_88bd3d31b56e3b36774a17c34e69baf1);
+            
+    
+            var marker_ed552357ec209bbbf66ff1c79a0d00e0 = L.marker(
+                [43.0683911, 12.6062922],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_ae477a9dda6938bfffbcf5c49a68b15d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b3f01fbe8bdc8fcb67b5594789fb7699 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_a0d1a9f6a6cf345f270cd35a6427b7da = $(`<div id="html_a0d1a9f6a6cf345f270cd35a6427b7da" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Assisi, Perugia, Umbria, Italia</b><br>         CAP: 06081<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_b3f01fbe8bdc8fcb67b5594789fb7699.setContent(html_a0d1a9f6a6cf345f270cd35a6427b7da);
+            
+        
+
+        marker_ed552357ec209bbbf66ff1c79a0d00e0.bindPopup(popup_b3f01fbe8bdc8fcb67b5594789fb7699)
+        ;
+
+        
+    
+    
+                marker_ed552357ec209bbbf66ff1c79a0d00e0.setIcon(icon_ae477a9dda6938bfffbcf5c49a68b15d);
+            
+    
+            var marker_dc520549074dc166e1c8493765d204d3 = L.marker(
+                [42.3617031, 13.4210622],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_098f07f76bd090701302f38251c4e318 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_97f06dbdce4533628a9479d2a15682f6 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9dd27fb403a5e6b0a2e7e66219048b34 = $(`<div id="html_9dd27fb403a5e6b0a2e7e66219048b34" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 L'Aquila, Abruzzo, Italia</b><br>         CAP: 67100<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_97f06dbdce4533628a9479d2a15682f6.setContent(html_9dd27fb403a5e6b0a2e7e66219048b34);
+            
+        
+
+        marker_dc520549074dc166e1c8493765d204d3.bindPopup(popup_97f06dbdce4533628a9479d2a15682f6)
+        ;
+
+        
+    
+    
+                marker_dc520549074dc166e1c8493765d204d3.setIcon(icon_098f07f76bd090701302f38251c4e318);
+            
+    
+            var marker_1574ffebddb7cab484050869fe79ce39 = L.marker(
+                [43.5849922, 13.5544756],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_19e82b72ca171033e8cfa6b5643532c1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d37b5835852f506dd43b25eff74bb795 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ef0b8d019e26bfb361e979d4e19ede95 = $(`<div id="html_ef0b8d019e26bfb361e979d4e19ede95" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Ancona, Marche, Italia</b><br>         CAP: 60129<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_d37b5835852f506dd43b25eff74bb795.setContent(html_ef0b8d019e26bfb361e979d4e19ede95);
+            
+        
+
+        marker_1574ffebddb7cab484050869fe79ce39.bindPopup(popup_d37b5835852f506dd43b25eff74bb795)
+        ;
+
+        
+    
+    
+                marker_1574ffebddb7cab484050869fe79ce39.setIcon(icon_19e82b72ca171033e8cfa6b5643532c1);
+            
+    
+            var marker_5917b38fc72e80e33d0f682102ad120c = L.marker(
+                [42.3426422, 14.2547255],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_f5584707b0c9874c31ec7aaa4d95aa9a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9bb42f97867782b1015f562a3f921c89 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_5d33b980617ffe7f4b5151d016891c13 = $(`<div id="html_5d33b980617ffe7f4b5151d016891c13" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Villamagna, Chieti, Abruzzo, Italia</b><br>         CAP: 66010<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_9bb42f97867782b1015f562a3f921c89.setContent(html_5d33b980617ffe7f4b5151d016891c13);
+            
+        
+
+        marker_5917b38fc72e80e33d0f682102ad120c.bindPopup(popup_9bb42f97867782b1015f562a3f921c89)
+        ;
+
+        
+    
+    
+                marker_5917b38fc72e80e33d0f682102ad120c.setIcon(icon_f5584707b0c9874c31ec7aaa4d95aa9a);
+            
+    
+            var marker_4160fae1df687e0eb2659402aaa9964c = L.marker(
+                [43.5588396, 12.8331082],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_6112ab8409e3d76d29e7f7d0261a5a6e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e74650ad8bfed67a03cdfb598a14388f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ef137892d677932993f56c0f4d6048f4 = $(`<div id="html_ef137892d677932993f56c0f4d6048f4" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Pergola, Pesaro e Urbino, Italia</b><br>         CAP: 61045<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_e74650ad8bfed67a03cdfb598a14388f.setContent(html_ef137892d677932993f56c0f4d6048f4);
+            
+        
+
+        marker_4160fae1df687e0eb2659402aaa9964c.bindPopup(popup_e74650ad8bfed67a03cdfb598a14388f)
+        ;
+
+        
+    
+    
+                marker_4160fae1df687e0eb2659402aaa9964c.setIcon(icon_6112ab8409e3d76d29e7f7d0261a5a6e);
+            
+    
+            var marker_8636c9e77da67a1d9a55b980d34a6070 = L.marker(
+                [43.0614579, 13.5384766],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_4f961ce30efffc195606fae181cead14 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_6b323f02260cfa1ab17c84586f03144f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_7f7a67e843ee12ea1b4bca3f919de054 = $(`<div id="html_7f7a67e843ee12ea1b4bca3f919de054" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Monteleone di Fermo, Fermo, Italia</b><br>         CAP: 63841<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_6b323f02260cfa1ab17c84586f03144f.setContent(html_7f7a67e843ee12ea1b4bca3f919de054);
+            
+        
+
+        marker_8636c9e77da67a1d9a55b980d34a6070.bindPopup(popup_6b323f02260cfa1ab17c84586f03144f)
+        ;
+
+        
+    
+    
+                marker_8636c9e77da67a1d9a55b980d34a6070.setIcon(icon_4f961ce30efffc195606fae181cead14);
+            
+    
+            var marker_27d92357983ba0335b83c213a250e2e9 = L.marker(
+                [40.5909915, 15.0354276],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_8270d17f81299dd79aa1669ec441fed5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f78123bb1384a586c3625b6c5a2156cd = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_177a813cd8d2511133b86a42bb8c4ce2 = $(`<div id="html_177a813cd8d2511133b86a42bb8c4ce2" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Eboli, Salerno, Campania, Italia</b><br>         CAP: 84025<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_f78123bb1384a586c3625b6c5a2156cd.setContent(html_177a813cd8d2511133b86a42bb8c4ce2);
+            
+        
+
+        marker_27d92357983ba0335b83c213a250e2e9.bindPopup(popup_f78123bb1384a586c3625b6c5a2156cd)
+        ;
+
+        
+    
+    
+                marker_27d92357983ba0335b83c213a250e2e9.setIcon(icon_8270d17f81299dd79aa1669ec441fed5);
+            
+    
+            var marker_c4f84731f75361cf3d8e5b47c9f6f169 = L.marker(
+                [43.4924218, 13.614023],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_d1f3e6ac9b73495c8e18bfa1f4c989d1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3f13c83a26417dbb4d1dadbbf8d30d2d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e6ecf4e416e168127cdc36ad18e5407d = $(`<div id="html_e6ecf4e416e168127cdc36ad18e5407d" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Marcelli, Numana, Ancona, Marche, Italia</b><br>         CAP: 60026<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_3f13c83a26417dbb4d1dadbbf8d30d2d.setContent(html_e6ecf4e416e168127cdc36ad18e5407d);
+            
+        
+
+        marker_c4f84731f75361cf3d8e5b47c9f6f169.bindPopup(popup_3f13c83a26417dbb4d1dadbbf8d30d2d)
+        ;
+
+        
+    
+    
+                marker_c4f84731f75361cf3d8e5b47c9f6f169.setIcon(icon_d1f3e6ac9b73495c8e18bfa1f4c989d1);
+            
+    
+            var marker_16cc5308aaf63306fb06652bac305338 = L.marker(
+                [43.1723428, 13.6219297],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_ac8140b3f5c0044dcd1ef71c98b75ab1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8b1b7382787d38757353a42af6de7041 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_2062467877092bdcf836a1c63bbc1c0c = $(`<div id="html_2062467877092bdcf836a1c63bbc1c0c" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Torre San Patrizio, Fermo, Marche, Italia</b><br>         CAP: 63814<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_8b1b7382787d38757353a42af6de7041.setContent(html_2062467877092bdcf836a1c63bbc1c0c);
+            
+        
+
+        marker_16cc5308aaf63306fb06652bac305338.bindPopup(popup_8b1b7382787d38757353a42af6de7041)
+        ;
+
+        
+    
+    
+                marker_16cc5308aaf63306fb06652bac305338.setIcon(icon_ac8140b3f5c0044dcd1ef71c98b75ab1);
+            
+    
+            var marker_fc5bf1c89f2999c38e9c2f50847ad044 = L.marker(
+                [42.6662952, 13.7184376],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_4159eedfdfd0a1fe58fee439d00234d0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b6d2bbca563429d1d1b66ab29310b65d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_161b2b6b6f50617756611a2864ff960f = $(`<div id="html_161b2b6b6f50617756611a2864ff960f" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Teramo, Abruzzo, Italia</b><br>         CAP: 64100<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_b6d2bbca563429d1d1b66ab29310b65d.setContent(html_161b2b6b6f50617756611a2864ff960f);
+            
+        
+
+        marker_fc5bf1c89f2999c38e9c2f50847ad044.bindPopup(popup_b6d2bbca563429d1d1b66ab29310b65d)
+        ;
+
+        
+    
+    
+                marker_fc5bf1c89f2999c38e9c2f50847ad044.setIcon(icon_4159eedfdfd0a1fe58fee439d00234d0);
+            
+    
+            var marker_6dc7d390f9266b841a795e34882c800c = L.marker(
+                [43.6171171, 13.5248687],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_ef706123913464228ef5b8c93b6c526f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f2ce3296ed3ca8fae2ec6af2b815b88f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_5f6347bdc9efaae93e2a632b1238f2d0 = $(`<div id="html_5f6347bdc9efaae93e2a632b1238f2d0" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Ancona, Marche, Italia</b><br>         CAP: 60123<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_f2ce3296ed3ca8fae2ec6af2b815b88f.setContent(html_5f6347bdc9efaae93e2a632b1238f2d0);
+            
+        
+
+        marker_6dc7d390f9266b841a795e34882c800c.bindPopup(popup_f2ce3296ed3ca8fae2ec6af2b815b88f)
+        ;
+
+        
+    
+    
+                marker_6dc7d390f9266b841a795e34882c800c.setIcon(icon_ef706123913464228ef5b8c93b6c526f);
+            
+    
+            var marker_24930dcb5b1d5082179c6c269935a994 = L.marker(
+                [45.394707, 11.9279394],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_cd68fa96d7df38b034cd1502439ed444 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a0cc5d11d6949ba6821204d9af690f3e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_f60b13f808a5ec071b4ed0e7c62e884e = $(`<div id="html_f60b13f808a5ec071b4ed0e7c62e884e" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Padova, Veneto, Italia</b><br>         CAP: 35127<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_a0cc5d11d6949ba6821204d9af690f3e.setContent(html_f60b13f808a5ec071b4ed0e7c62e884e);
+            
+        
+
+        marker_24930dcb5b1d5082179c6c269935a994.bindPopup(popup_a0cc5d11d6949ba6821204d9af690f3e)
+        ;
+
+        
+    
+    
+                marker_24930dcb5b1d5082179c6c269935a994.setIcon(icon_cd68fa96d7df38b034cd1502439ed444);
+            
+    
+            var marker_b8655576257b889b06a0b0c6a44fc726 = L.marker(
+                [42.936345, 12.0142852],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_dd47f0b4a1dc0d986bcccbd79228bebc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_74d2e3446cfde2d2d4e39e521e788f61 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ad032f764dc31c4db60eb5cf56cc1c98 = $(`<div id="html_ad032f764dc31c4db60eb5cf56cc1c98" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Città della Pieve, Perugia, Umbria, Italia</b><br>         CAP: 06026<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_74d2e3446cfde2d2d4e39e521e788f61.setContent(html_ad032f764dc31c4db60eb5cf56cc1c98);
+            
+        
+
+        marker_b8655576257b889b06a0b0c6a44fc726.bindPopup(popup_74d2e3446cfde2d2d4e39e521e788f61)
+        ;
+
+        
+    
+    
+                marker_b8655576257b889b06a0b0c6a44fc726.setIcon(icon_dd47f0b4a1dc0d986bcccbd79228bebc);
+            
+    
+            var marker_eaf850511cfd3a7e706793edcdf11d66 = L.marker(
+                [43.1822587, 12.3263901],
+                {
+}
+            ).addTo(map_fd386e5c1af70cc4a5ac0c16137b6afb);
+        
+    
+            var icon_c76022469774c2098cf3156b959d93a1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_459c891573f3bab161f1b2b9545b760d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e087f0daa0a69b623a1bcd89882ea58b = $(`<div id="html_e087f0daa0a69b623a1bcd89882ea58b" style="width: 100.0%; height: 100.0%;">     <div style="font-size:14px; line-height:1.5;">         <b>📍 Perugia, Umbria, Italia</b><br>         CAP: 06133<br>         Clienti: <b>1</b>     </div>     </div>`)[0];
+                popup_459c891573f3bab161f1b2b9545b760d.setContent(html_e087f0daa0a69b623a1bcd89882ea58b);
+            
+        
+
+        marker_eaf850511cfd3a7e706793edcdf11d66.bindPopup(popup_459c891573f3bab161f1b2b9545b760d)
+        ;
+
+        
+    
+    
+                marker_eaf850511cfd3a7e706793edcdf11d66.setIcon(icon_c76022469774c2098cf3156b959d93a1);
+            
+</script>
+</html>
